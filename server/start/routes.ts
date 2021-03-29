@@ -30,5 +30,5 @@ Route.get('health', async ({ response }) => {
 })
 
 Route.get('test', async () => {
-  return Database.query().select('*').from('tutor')
+  return Database.query().select('*').from('tutors')
 })
