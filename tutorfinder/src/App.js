@@ -4,6 +4,7 @@ import TutorInfo from './components/TutorInfo'
 import './App.css';
 import Home from './Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BulletinBoard from './BulletinBoard'
 
 function App() {
   return (
@@ -17,8 +18,9 @@ function App() {
         />
       </head>
       {/* <Home></Home> */}
-        <Navbar fixed="top" />
-        <TutorInfo />
+        {/* <Navbar fixed="top" />
+        <TutorInfo /> */}
+        <BulletinBoard></BulletinBoard>
     </div>
   );
 }
