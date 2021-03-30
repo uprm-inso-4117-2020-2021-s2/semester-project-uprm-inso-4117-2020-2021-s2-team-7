@@ -4,7 +4,9 @@ import TutorInfo from './components/TutorInfo'
 import './App.css';
 import Home from './Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BulletinBoard from './BulletinBoard'
+import BulletinBoard from './BulletinBoard';
+import Nav from './Nav.js';
+import Welcome from "./Welcome";
 
 function App() {
   return (
@@ -20,9 +22,14 @@ function App() {
       {/* <Home></Home> */}
         {/* <Navbar fixed="top" />
         <TutorInfo /> */}
-        <BulletinBoard></BulletinBoard>
+        {/* <BulletinBoard></BulletinBoard> */}
+        <Nav />
+     <Welcome/>
+        
     </div>
   );
 }
+
+
 
 export default App;

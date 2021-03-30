@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+
+.title{
+    font-family: 'Nunito Sans', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 48px;
+line-height: 65px;
+text-align: center;
+}
+
+.navBar{
+    background-color: #5D7FC5;
+}
