@@ -1,6 +1,9 @@
-import logo from './logo.svg';
+import React from 'react';
+import Navbar from './components/Navbar';
+import TutorInfo from './components/TutorInfo'
 import './App.css';
 import Home from './Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -13,7 +16,9 @@ function App() {
           crossorigin="anonymous"
         />
       </head>
-      <Home></Home>
+      {/* <Home></Home> */}
+        <Navbar fixed="top" />
+        <TutorInfo />
     </div>
   );
 }

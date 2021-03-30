@@ -1,0 +1,54 @@
+.container {
+    padding-top: 30px;
+    width: 30%;
+}
+
+.Profile {
+  padding: 2rem;
+  border: 2px solid #fff;
+  text-align: center;
+  background-color: #E0E0E0;
+  border: 1px solid #6F6B6B;
+  border-radius: 1rem!important;
+}
+
+.pfp {
+    text-align: center;
+    width: 75%;
+}
+
+.Info {
+    padding: 1rem;
+    border: 1px solid #6F6B6B;
+    background-color: #E0E0E0;
+    border-radius: 1rem!important;
+    overflow-y: auto;
+}
+
+.Name {
+    padding: 10px;
+}
+
+.More {
+    border-bottom: 1px solid #6F6B6B;
+    padding-bottom: 15px;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+ul {
+    margin-left: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    position: absolute;
+    white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+* {
+  -ms-overflow-style: none !important;
+}
