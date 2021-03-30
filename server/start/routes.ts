@@ -24,6 +24,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('/', 'HomeController.index')
 
+// Health check
 Route.get('health', async ({ response }) => {
   const report = await HealthCheck.getReport()
   return report.healthy ? response.ok(report) : response.badRequest(report)
@@ -32,3 +33,16 @@ Route.get('health', async ({ response }) => {
 Route.get('test', async () => {
   return Database.query().select('*').from('tutors')
 })
+
+Route.group(() => {
+  // Tutor CRUD operations
+  Route.resource('tutors', 'TutorsController').apiOnly()
+
+  // Certifications
+  // Address
+  // Message
+  // Subject
+  // Level of Education
+  // Offers
+  // Sub-LoE
+}).prefix('tutorFinder')

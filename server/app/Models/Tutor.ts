@@ -3,10 +3,8 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 
 export default class Tutor extends BaseModel {
-  public static connection = 'pg'
-
   @column({ isPrimary: true })
-  public tid: number
+  public id: number
 
   @column()
   public tFirstName: string
