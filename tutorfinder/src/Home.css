@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+body { 
+    background: url('assets/main.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -100px;
+}
+
+.navtext {
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 65px;
+    text-align: left;
+    padding-left: 5%;
+
+    color: #000000;
+}
+
+.navspace {
+    background: #5D7FC5;
+    height: 100px;
+}
+
+.boton {
+    background: #E0E0E0;
+    border-radius: 45px;
+
+    width: 200px;
+
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 41px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+.boton:hover {
+    background: #ffef93;
+}
+
+.box {
+    margin-left: 30%;
+    width: 40%;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 25px;
+    padding: 20px;
+}
+
+.boxTitle {
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+
+    color: #333333;
+}
+
+.boxText {
+    font-family: Nunito Sans;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+  
+.form-control-underlined {
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+.form-control::placeholder {
+    font-size: 0.95rem;
+    color: #aaa;
+    font-style: italic;
+  }
