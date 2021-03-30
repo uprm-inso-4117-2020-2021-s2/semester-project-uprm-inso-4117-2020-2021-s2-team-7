@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Navbar.css";
 import { FormControl, Form } from 'react-bootstrap';
-import pficon from "../imgs/pficon.png";
+import pficon from "../assets/pficon.png";
 
 class Navbar extends Component {
 

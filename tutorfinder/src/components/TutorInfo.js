@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./TutorInfo.css";
 import { Col, Row, Container, Button } from 'react-bootstrap';
-import pfp from "../imgs/pfp.png";
+import pfp from "../assets/pfp.png";
 import { TiLocation, TiGlobe } from "react-icons/ti";
 
 class TutorInfo extends Component {
