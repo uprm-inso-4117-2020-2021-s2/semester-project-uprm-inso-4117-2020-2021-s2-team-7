@@ -2,34 +2,55 @@ import React from "react";
 import './Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
+import Nav from './Nav.js';
+import Signup from "./Signup";
+import Login from "./Login";
 
-function Home() {
+
+class Home extends React.Component {
+
+    constructor (props) {
+        super(props);
+        this.state = {
+            isJoinNowVisible: false,
+            isSignInVisible: false,
+            isMainVisible: true
+        }
+    }
+
+    onJoinNowClick() {
+        this.setState({
+            isJoinNowVisible: true,
+            isSignInVisible: false,
+            isMainVisible:false
+        });
+    }
+
+    onSignInClick() {
+        this.setState({
+            isJoinNowVisible: false,
+            isSignInVisible: true,
+            isMainVisible:false
+        });
+    }
+
+    onLogoClick() {
+        this.setState({
+            isJoinNowVisible: false,
+            isSignInVisible: false,
+            isMainVisible:true
+        });
+    }
+
+    render(){
     return (
         <body>
-            <div className="navspace">
-                <table style={{ width: '100%', height: '100px' }}>
-                    <tbody>
-                        <tr>
-                            <td style={{ width: '70%', verticalAlign: 'middle' }}>
-                                <div className="navtext">
-                                    TutorFinder
-                                </div>
-                            </td>
-                            <td>
-                                <div className="boton">
-                                    Join Now
-                                </div>
-                            </td>
-                            <td>
-                                <div className="boton">
-                                    Sign In
-                            </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div style={{ width: "100%", paddingTop: "30%" }}>
+            <Nav 
+            onJoinNowClick={this.onJoinNowClick.bind(this)} 
+            onSignInClick={this.onSignInClick.bind(this)} 
+            onLogoClick={this.onLogoClick.bind(this)}>
+            </Nav>
+            {this.state.isMainVisible && <div style={{ width: "100%", paddingTop: "30%" }}>
                 <div className="box">
                     <div className="boxTitle">
                         Find the Best Tutor for You</div>
@@ -50,9 +71,12 @@ function Home() {
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>}
+            {this.state.isJoinNowVisible && <Signup/>}
+            {this.state.isSignInVisible && <Login/>}
         </body>
     );
+    }
 }
 
 export default Home;

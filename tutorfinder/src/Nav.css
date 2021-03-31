@@ -1,57 +1,37 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap");
-
-.title {
-  font-family: "Nunito Sans", sans-serif;
+.navtext {
+  font-family: Nunito Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 48px;
   line-height: 65px;
+  text-align: left;
+  padding-left: 5%;
 
+  color: #000000;
 }
 
-.navBar {
-    table-layout: fixed;
-  background-color: #5d7fc5;
-  width: 100%;
+.navspace {
+  background: #5D7FC5;
+  height: 100px;
 }
 
-.buttons {
-  background: #e0e0e0;
+.boton {
+  background: #E0E0E0;
   border-radius: 45px;
-  outline: none;
-  border-style: solid;
 
-}
+  width: 200px;
 
-.buttonLetters {
-  font-family: "Nunito Sans", sans-serif;
+  font-family: Nunito Sans;
   font-style: normal;
   font-weight: 300;
-  font-size: 1.8em;
+  font-size: 20px;
   line-height: 41px;
   text-align: center;
-  padding-right: 10%;
-  padding-left: 10%;
- 
+
+  color: #000000;
+
 }
 
-.left{
-text-align: left;
-padding-left: 2.5%;
-width: 50%;
+.boton:hover {
+  background: #ffef93;
 }
-
-.right{
-    text-align: left;
-    padding-right: 10%;
-    width: 20%;
-}
-
-.middle{
-    /* background-color: red; */
-    text-align: right;
-    padding-right: 2.5%;
-}
-
-
-

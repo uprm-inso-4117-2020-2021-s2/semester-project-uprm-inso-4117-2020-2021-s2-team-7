@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import "./Welcome.css"
-import foto from "./assets/bg.png" 
 
 class Search extends React.Component {
   

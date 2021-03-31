@@ -7,43 +7,6 @@ body {
     background-position-y: -100px;
 }
 
-.navtext {
-    font-family: Nunito Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 48px;
-    line-height: 65px;
-    text-align: left;
-    padding-left: 5%;
-
-    color: #000000;
-}
-
-.navspace {
-    background: #5D7FC5;
-    height: 100px;
-}
-
-.boton {
-    background: #E0E0E0;
-    border-radius: 45px;
-
-    width: 200px;
-
-    font-family: Nunito Sans;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 41px;
-    text-align: center;
-
-    color: #000000;
-
-}
-
-.boton:hover {
-    background: #ffef93;
-}
 
 .box {
     margin-left: 30%;

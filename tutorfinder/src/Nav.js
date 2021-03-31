@@ -3,21 +3,37 @@ import "./App.css";
 import "./Nav.css"
 
 class Nav extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
   
   render(){
 
   return (
-    <div className="">
-  <table className="navBar">
-      <tr>
-          <td className="left"><h1 className="title">TutorFinder</h1></td>
-         
-          <td className="middle "><button className="buttons buttonLetters ">Join Now</button></td>
-          <td className="right"><button className="buttons buttonLetters">Sign In</button></td>
-      </tr>
-      </table>
-      
-    </div>
+    <div className="navspace">
+                <table style={{ width: '100%', height: '100px' }}>
+                    <tbody>
+                        <tr>
+                            <td style={{ width: '70%', verticalAlign: 'middle' }} onClick={() => this.props.onLogoClick()}>
+                                <div className="navtext">
+                                    TutorFinder
+                                </div>
+                            </td>
+                            <td onClick={()=> this.props.onJoinNowClick()}>
+                                <div className="boton" >
+                                    Join Now
+                                </div>
+                            </td>
+                            <td>
+                                <div className="boton" onClick={() => this.props.onSignInClick()}>
+                                    Sign In
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
   );
 }
 }

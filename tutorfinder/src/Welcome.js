@@ -1,8 +1,6 @@
 import React from "react";
 import "./App.css";
 import "./Welcome.css"
-import foto from "./assets/bg.png" 
-import Search from "./Search";
 import Login from "./Login";
 import Signup from "./Signup";
 
