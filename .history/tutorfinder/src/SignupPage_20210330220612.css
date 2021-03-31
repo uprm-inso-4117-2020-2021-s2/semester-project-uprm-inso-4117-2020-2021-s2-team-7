@@ -1,0 +1,21 @@
+
+.body{
+    background-color: #E0E0E0;
+    position: relative;
+  text-align: center;
+  
+   
+ 
+}
+
+.container{
+    justify-content: center; align-items: center;
+  background-color: aqua;
+}
+
+.content{
+    position: relative;
+    text-align: center;
+    width: 50%;
+    background-color: red;
+}
