@@ -1,43 +1,63 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import Encryption from '@ioc:Adonis/Core/Encryption'
+import APIModel from 'App/Models/APIModel'
 
-export default class Tutor extends BaseModel {
+export default class Tutor extends BaseModel implements APIModel {
+  public requiredParams: string[] = [
+    'tfirst_name',
+    'tlast_name',
+    'temail',
+    'tpassword',
+    'tphone',
+    'tnationality',
+    'tage',
+    'tsummary',
+    'toverview',
+  ]
+
   @column({ isPrimary: true })
-  public id: number
+  public tid: number
 
-  @column()
+  @column({ columnName: 'tfirst_name' })
   public tFirstName: string
 
-  @column()
+  @column({ columnName: 'tlast_name' })
   public tLastName: string
 
-  @column()
+  @column({ columnName: 'temail' })
   public tEmail: string
 
   @column({
     prepare: (value: string) => Encryption.encrypt(value),
     consume: (value: string) => Encryption.decrypt(value),
+    columnName: 'tpassword',
   })
   public tPassword: string
 
-  @column()
+  @column({ columnName: 'tphone' })
   public tPhone: string
 
-  @column()
+  @column({ columnName: 'tnationality' })
   public tNationality: string
 
-  @column()
+  @column({ columnName: 'tage' })
   public tAge: number
 
-  @column()
+  @column({ columnName: 'tsummary' })
   public tSummary: string
 
-  @column()
+  @column({ columnName: 'toverview' })
   public tOverview: string
 
-  // @column()
-  // public tNationality: string
+  @column({ columnName: 'tweekdays_day' })
+  public tWeekdaysDay: boolean
+
+  @column({ columnName: 'tweekdays_eve' })
+  public tWeekdaysEve: boolean
+
+  @column({ columnName: 'tweekends' })
+  public tWeekends: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
