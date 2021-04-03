@@ -20,7 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
-import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('/', 'HomeController.index')
 
@@ -30,19 +29,22 @@ Route.get('health', async ({ response }) => {
   return report.healthy ? response.ok(report) : response.badRequest(report)
 })
 
-Route.get('test', async () => {
-  return Database.query().select('*').from('tutors')
-})
-
 Route.group(() => {
-  // Tutor CRUD operations
-  Route.resource('tutors', 'TutorsController').apiOnly()
+  Route.group(() => {
+    // Tutor CRUD operations
+    Route.resource('tutors', 'TutorsController').apiOnly()
 
-  // Certifications
-  // Address
-  // Message
-  // Subject
-  // Level of Education
-  // Offers
-  // Sub-LoE
+    // Certifications
+    // Address
+    // Message
+    // Subject
+    // Level of Education
+    // Offers
+    // Sub-LoE
+  }).middleware('auth')
+
+  // Authentication
+  Route.post('/register', 'AuthController.register')
+  Route.post('/login', 'AuthController.login')
+  Route.get('/logout', 'AuthController.logout')
 }).prefix('tutorFinder')
