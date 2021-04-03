@@ -19,9 +19,8 @@ function App() {
           crossorigin="anonymous"
         />
       </head>
-      {/* <Home></Home> */}
-      {/* <TutorInfo></TutorInfo> */}
-      <SignupPage></SignupPage>
+      <Home></Home>
+      {/* <SignupPage></SignupPage> */}
         {/* <Navbar fixed="top" />
         <TutorInfo /> */}
         {/* <BulletinBoard></BulletinBoard> */}

@@ -3,7 +3,7 @@ import './Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Nav from './Nav.js';
-import Signup from "./Signup";
+import SignupPage from "./SignupPage";
 import Login from "./Login";
 
 
@@ -44,7 +44,7 @@ class Home extends React.Component {
 
     render(){
     return (
-        <body>
+        <div className="bod">
             <Nav 
             onJoinNowClick={this.onJoinNowClick.bind(this)} 
             onSignInClick={this.onSignInClick.bind(this)} 
@@ -72,9 +72,9 @@ class Home extends React.Component {
                     </form>
                 </div>
             </div>}
-            {this.state.isJoinNowVisible && <Signup/>}
+            {this.state.isJoinNowVisible && <SignupPage/>}
             {this.state.isSignInVisible && <Login/>}
-        </body>
+        </div>
     );
     }
 }
