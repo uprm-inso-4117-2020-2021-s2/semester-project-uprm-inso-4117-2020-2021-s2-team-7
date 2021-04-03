@@ -71,7 +71,7 @@ export default class AddressController {
     }
   }
 
-  // Delete existing Address.
+  // Delete existing Address
   public async destroy({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided' })
     try {
