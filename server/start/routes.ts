@@ -47,4 +47,9 @@ Route.group(() => {
   Route.post('/register', 'AuthController.register')
   Route.post('/login', 'AuthController.login')
   Route.get('/logout', 'AuthController.logout')
+
+  // Home page
+  Route.get('', async () => {
+    return { message: 'Welcome to TutorFinder API!' }
+  })
 }).prefix('tutorFinder')
