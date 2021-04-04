@@ -11,7 +11,7 @@ export default class Address extends BaseModel implements APIModel {
   public aStreet1: string
 
   @column({ columnName: 'astreet2' })
-  public aStreet2: string
+  public aStreet2?: string
 
   @column({ columnName: 'acity' })
   public aCity: string
