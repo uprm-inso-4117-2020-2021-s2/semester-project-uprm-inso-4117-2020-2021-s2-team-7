@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel } from '@ioc:Adonis/Lucid/Orm'
+import { column, beforeSave, BaseModel, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
+import Tutor from 'App/Models/Tutor'
 
 export default class User extends BaseModel implements APIModel {
   public requiredParams = ['email', 'password']
@@ -14,6 +15,9 @@ export default class User extends BaseModel implements APIModel {
 
   @column({ serializeAs: null })
   public password: string
+
+  @hasOne(() => Tutor, { localKey: 'uid', foreignKey: 'userId' })
+  public tutor: HasOne<typeof Tutor>
 
   @column()
   public rememberMeToken?: string
