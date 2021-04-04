@@ -1,13 +1,13 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Tutor from 'App/Models/Tutor'
 import GenericController from 'App/Controllers/Http/GenericController'
-import User from 'App/Models/User'
+import { tutorDAO } from 'App/DAO/TutorDAO'
 
 export default class TutorsController {
   // Get all tutors.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Tutor.all()
+      return await tutorDAO.getAll()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Tutors.',
@@ -22,13 +22,8 @@ export default class TutorsController {
     if (!variables) {
       return response.badRequest({ message: 'Specify the required parameters to create a Tutor' })
     }
-    const uid = request.input('user_id', false)
-    if (uid) {
-      const uniqueUser = await User.find(uid)
-      if (uniqueUser !== null) return response.badRequest({ message: 'User already exists.' })
-    }
     try {
-      let createdTutor: Tutor = await Tutor.create(variables)
+      let createdTutor: Tutor = await tutorDAO.create(variables)
       return response.created({ message: 'Tutor created successfully.', id: createdTutor.tid })
     } catch (err) {
       return response.internalServerError({
@@ -42,7 +37,7 @@ export default class TutorsController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const tutor: Tutor | null = await Tutor.find(params.id)
+      const tutor: Tutor | null = await tutorDAO.getById(params.id)
       if (!tutor) {
         return response.notFound({ message: `Tutor with id ${params.id} not found.` })
       }
@@ -62,11 +57,9 @@ export default class TutorsController {
       return response.badRequest({ message: 'A valid id and data must be provided.' })
     }
     try {
-      let tutor: Tutor | null = await Tutor.find(params.id)
+      let tutor: Tutor | boolean = await tutorDAO.update(params.id, validParams)
       if (!tutor)
         return response.notFound({ message: `Could not find tutor with id: ${params.id}` })
-      tutor.merge(validParams)
-      await tutor.save()
       return response.send({ message: 'Tutor updated successfully.', tutor })
     } catch (err) {
       return response.internalServerError({
@@ -80,10 +73,9 @@ export default class TutorsController {
   public async destroy({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided' })
     try {
-      let tutor: Tutor | null = await Tutor.find(params.id)
+      let tutor: boolean = await tutorDAO.delete(params.id)
       if (!tutor)
         return response.notFound({ message: `Could not find tutor with id: ${params.id}.` })
-      await tutor.delete()
       return response.send({ message: `Tutor deleted successfully`, id: params.id })
     } catch (err) {
       return response.internalServerError({
