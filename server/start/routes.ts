@@ -37,12 +37,17 @@ Route.get('test', async () => {
 Route.group(() => {
   // Tutor CRUD operations
   Route.resource('tutors', 'TutorsController').apiOnly()
-
-  // Certifications
   // Address
+  Route.resource('addresses', 'AddressController').apiOnly()
   // Message
-  // Subject
+  Route.resource('messages', 'MessageController').apiOnly()
+  // Certifications
+  Route.resource('certifications', 'CertificationController').apiOnly()
   // Level of Education
+  Route.resource('levelOfEducations', 'LevelOfEducationController').apiOnly()
+  // Subject
+  Route.resource('subjects', 'SubjectController').apiOnly()
+
   // Offers
   // Sub-LoE
 }).prefix('tutorFinder')
