@@ -9,11 +9,11 @@ export default class Addresses extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('aid')
-        table.string('astreet1')
-        table.string('astreet2')
-        table.string('acity')
-        table.string('acountry')
-        table.string('azipcode')
+        table.string('astreet1').notNullable()
+        table.string('astreet2').nullable()
+        table.string('acity').notNullable()
+        table.string('acountry').notNullable()
+        table.string('azipcode').notNullable()
         table.timestamps(true)
       })
     }

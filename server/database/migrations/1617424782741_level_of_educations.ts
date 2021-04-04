@@ -9,7 +9,7 @@ export default class LevelOfEducations extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('leid')
-        table.string('lename')
+        table.string('lename').notNullable()
         table.timestamps(true)
       })
     }

@@ -9,10 +9,10 @@ export default class Messages extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('mid')
-        table.string('mmodality')
-        table.string('mmessage')
-        table.string('mphone')
-        table.string('memail')
+        table.string('mmodality').notNullable()
+        table.string('mmessage').notNullable()
+        table.string('mphone').notNullable()
+        table.string('memail').notNullable()
         table.timestamps(true)
       })
     }

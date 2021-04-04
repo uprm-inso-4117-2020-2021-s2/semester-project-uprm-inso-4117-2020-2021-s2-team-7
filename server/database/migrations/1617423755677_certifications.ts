@@ -9,9 +9,9 @@ export default class Certifications extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('cid')
-        table.string('cschool')
-        table.string('csubject')
-        table.string('cserial_name')
+        table.string('cschool').notNullable()
+        table.string('csubject').notNullable()
+        table.string('cserial_name').notNullable()
         table.timestamps(true)
       })
     }

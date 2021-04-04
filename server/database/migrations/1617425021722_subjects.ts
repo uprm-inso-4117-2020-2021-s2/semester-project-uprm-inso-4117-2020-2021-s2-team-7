@@ -9,7 +9,7 @@ export default class Subjects extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('sid')
-        table.string('sname')
+        table.string('sname').notNullable()
         table.timestamps(true)
       })
     }
