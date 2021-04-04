@@ -38,15 +38,15 @@ Route.group(() => {
   // Tutor CRUD operations
   Route.resource('tutors', 'TutorsController').apiOnly()
   // Address
-  Route.resource('address', 'AddressController').apiOnly()
+  Route.resource('addresses', 'AddressController').apiOnly()
   // Message
-  Route.resource('message', 'MessageController').apiOnly()
+  Route.resource('messages', 'MessageController').apiOnly()
   // Certifications
-  Route.resource('certification', 'CertificationController').apiOnly()
+  Route.resource('certifications', 'CertificationController').apiOnly()
   // Level of Education
-  Route.resource('levelOfEducation', 'LevelOfEducationController').apiOnly()
+  Route.resource('levelOfEducations', 'LevelOfEducationController').apiOnly()
   // Subject
-  Route.resource('subject', 'SubjectController').apiOnly()
+  Route.resource('subjects', 'SubjectController').apiOnly()
 
   // Offers
   // Sub-LoE
