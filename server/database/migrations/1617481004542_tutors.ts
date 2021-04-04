@@ -9,15 +9,14 @@ export default class Tutors extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('tid')
-        table.string('tfirst_name')
-        table.string('tlast_name')
-        table.string('temail')
-        table.string('tpassword')
-        table.string('tphone')
-        table.string('tnationality')
-        table.integer('tage')
-        table.string('tsummary')
-        table.string('toverview')
+        table.integer('user_id').unique().notNullable().unsigned()
+        table.string('tfirst_name').notNullable()
+        table.string('tlast_name').notNullable()
+        table.string('tphone').notNullable()
+        table.string('tnationality').notNullable()
+        table.integer('tage').notNullable()
+        table.string('tsummary').notNullable()
+        table.string('toverview').notNullable()
         table.boolean('tweekdays_day').defaultTo(false)
         table.boolean('tweekdays_eve').defaultTo(false)
         table.boolean('tweekends').defaultTo(false)
@@ -27,6 +26,6 @@ export default class Tutors extends BaseSchema {
   }
 
   public async down() {
-    this.schema.dropTable(this.tableName)
+    if (await this.schema.hasTable(this.tableName)) this.schema.dropTable(this.tableName)
   }
 }

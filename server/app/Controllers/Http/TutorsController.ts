@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Tutor from 'App/Models/Tutor'
 import GenericController from 'App/Controllers/Http/GenericController'
+import User from 'App/Models/User'
 
 export default class TutorsController {
   // Get all tutors.
@@ -17,9 +18,14 @@ export default class TutorsController {
 
   // Create new tutor.
   public async store({ request, response }: HttpContextContract) {
-    let variables = GenericController.getValidVariables(request, new Tutor())
+    const variables = GenericController.getValidVariables(request, new Tutor())
     if (!variables) {
       return response.badRequest({ message: 'Specify the required parameters to create a Tutor' })
+    }
+    const uid = request.input('user_id', false)
+    if (uid) {
+      const uniqueUser = await User.find(uid)
+      if (uniqueUser !== null) return response.badRequest({ message: 'User already exists.' })
     }
     try {
       let createdTutor: Tutor = await Tutor.create(variables)

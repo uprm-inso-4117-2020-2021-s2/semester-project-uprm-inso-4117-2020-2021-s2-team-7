@@ -1,39 +1,30 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
-import Encryption from '@ioc:Adonis/Core/Encryption'
 import APIModel from 'App/Models/APIModel'
 
 export default class Tutor extends BaseModel implements APIModel {
   public requiredParams: string[] = [
     'tfirst_name',
     'tlast_name',
-    'temail',
-    'tpassword',
     'tphone',
     'tnationality',
     'tage',
     'tsummary',
     'toverview',
+    'user_id',
   ]
 
   @column({ isPrimary: true })
   public tid: number
+
+  @column({ columnName: 'user_id' })
+  public userId: number
 
   @column({ columnName: 'tfirst_name' })
   public tFirstName: string
 
   @column({ columnName: 'tlast_name' })
   public tLastName: string
-
-  @column({ columnName: 'temail' })
-  public tEmail: string
-
-  @column({
-    prepare: (value: string) => Encryption.encrypt(value),
-    consume: (value: string) => Encryption.decrypt(value),
-    columnName: 'tpassword',
-  })
-  public tPassword: string
 
   @column({ columnName: 'tphone' })
   public tPhone: string

@@ -20,7 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
-import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('/', 'HomeController.index')
 
@@ -30,24 +29,31 @@ Route.get('health', async ({ response }) => {
   return report.healthy ? response.ok(report) : response.badRequest(report)
 })
 
-Route.get('test', async () => {
-  return Database.query().select('*').from('tutors')
-})
-
 Route.group(() => {
-  // Tutor CRUD operations
-  Route.resource('tutors', 'TutorsController').apiOnly()
-  // Address
-  Route.resource('addresses', 'AddressController').apiOnly()
-  // Message
-  Route.resource('messages', 'MessageController').apiOnly()
-  // Certifications
-  Route.resource('certifications', 'CertificationController').apiOnly()
-  // Level of Education
-  Route.resource('levelOfEducations', 'LevelOfEducationController').apiOnly()
-  // Subject
-  Route.resource('subjects', 'SubjectController').apiOnly()
+  Route.group(() => {
+    // Tutor CRUD operations
+    Route.resource('tutors', 'TutorsController').apiOnly()
+    // Address
+    Route.resource('addresses', 'AddressController').apiOnly()
+    // Message
+    Route.resource('messages', 'MessageController').apiOnly()
+    // Certifications
+    Route.resource('certifications', 'CertificationController').apiOnly()
+    // Level of Education
+    Route.resource('levelOfEducations', 'LevelOfEducationController').apiOnly()
+    // Subject
+    Route.resource('subjects', 'SubjectController').apiOnly()
+    // Offers
+    // Sub-LoE
+  }).middleware('auth')
 
-  // Offers
-  // Sub-LoE
+  // Authentication
+  Route.post('/register', 'AuthController.register')
+  Route.post('/login', 'AuthController.login')
+  Route.get('/logout', 'AuthController.logout')
+
+  // Home page
+  Route.get('', async () => {
+    return { message: 'Welcome to TutorFinder API!' }
+  })
 }).prefix('tutorFinder')
