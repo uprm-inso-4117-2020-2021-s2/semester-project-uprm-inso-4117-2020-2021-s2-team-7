@@ -6,7 +6,7 @@ export default class AddressController {
   // Get all Address.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Address.all()
+      return await Address.query().preload('tutor').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Address.',
@@ -36,7 +36,10 @@ export default class AddressController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const address: Address | null = await Address.find(params.id)
+      const address: Address | null = await Address.query()
+        .preload('tutor')
+        .where('aid', params.id)
+        .first()
       if (!address) {
         return response.notFound({ message: `Address with id ${params.id} not found.` })
       }

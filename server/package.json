@@ -4,12 +4,13 @@
   "private": true,
   "scripts": {
     "build": "node ace build --production",
-    "start": "node server.js",
+    "start": "node build/server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@adonisjs/assembler": "^3.0.0",
     "adonis-preset-ts": "^2.0.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
@@ -22,7 +23,6 @@
     "youch-terminal": "^1.0.1"
   },
   "dependencies": {
-    "@adonisjs/assembler": "^3.0.0",
     "@adonisjs/auth": "^5.1.1",
     "@adonisjs/core": "^5.0.4-preview-rc",
     "@adonisjs/lucid": "^10.0.0",
