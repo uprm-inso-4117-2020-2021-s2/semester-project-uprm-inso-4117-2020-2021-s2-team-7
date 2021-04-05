@@ -13,6 +13,7 @@ import APIModel from 'App/Models/APIModel'
 import User from 'App/Models/User'
 import Address from 'App/Models/Address'
 import Message from 'App/Models/Message'
+import Certification from 'App/Models/Certification'
 
 export default class Tutor extends BaseModel implements APIModel {
   public requiredParams: string[] = [
@@ -40,6 +41,9 @@ export default class Tutor extends BaseModel implements APIModel {
 
   @hasMany(() => Message, { localKey: 'tid', foreignKey: 'tutorId' })
   public messages: HasMany<typeof Message>
+
+  @hasMany(() => Certification, { localKey: 'tid', foreignKey: 'tutorId' })
+  public certifications: HasMany<typeof Certification>
 
   @column({ columnName: 'tfirst_name' })
   public tFirstName: string
