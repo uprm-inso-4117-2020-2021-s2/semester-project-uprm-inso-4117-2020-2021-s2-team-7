@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node ace build --production",
-    "start": "cd build/ && node server.js",
+    "build": "ENV_SILENT=true node ace build --production",
+    "start": "ENV_SILENT=true cd build/ && ENV_SILENT=true node server.js",
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
