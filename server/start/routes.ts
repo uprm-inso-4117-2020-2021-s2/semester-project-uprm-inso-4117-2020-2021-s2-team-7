@@ -48,7 +48,7 @@ Route.group(() => {
     Route.put('levelOfEducations/:id', 'LevelOfEducationController.update')
     Route.delete('levelOfEducations/:id', 'LevelOfEducationController.destroy')
     // Subject
-    Route.post('subjects/:id', 'SubjectController.store')
+    Route.post('subjects', 'SubjectController.store')
     Route.put('subjects/:id', 'SubjectController.update')
     Route.delete('subjects/:id', 'SubjectController.destroy')
     // Sub-LoE
