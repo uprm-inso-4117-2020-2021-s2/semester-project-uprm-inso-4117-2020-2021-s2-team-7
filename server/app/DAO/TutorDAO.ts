@@ -21,6 +21,7 @@ class TutorDAO implements BaseDAO<Tutor> {
     return await Tutor.query().preload('user').preload('address').exec()
   }
 
+  // Get tutor by id.
   public async getById(id: number): Promise<Tutor | null> {
     return await Tutor.query().preload('user').preload('address').where('tid', id).first()
   }
