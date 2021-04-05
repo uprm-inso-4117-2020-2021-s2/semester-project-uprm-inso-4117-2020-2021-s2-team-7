@@ -32,21 +32,54 @@ Route.get('health', async ({ response }) => {
 Route.group(() => {
   Route.group(() => {
     // Tutor CRUD operations
-    Route.resource('tutors', 'TutorsController').apiOnly()
+    Route.post('tutors', 'TutorsController.store')
+    Route.put('tutors/:id', 'TutorsController.update')
+    Route.delete('tutors/:id', 'TutorsController.destroy')
     // Address
-    Route.resource('addresses', 'AddressController').apiOnly()
-    // Message
-    Route.resource('messages', 'MessageController').apiOnly()
+    Route.post('addresses', 'AddressController.store')
+    Route.put('addresses/:id', 'AddressController.update')
+    Route.delete('addresses/:id', 'AddressController.destroy')
     // Certifications
-    Route.resource('certifications', 'CertificationController').apiOnly()
+    Route.post('certifications', 'CertificationController.store')
+    Route.put('certifications/:id', 'CertificationController.update')
+    Route.delete('certifications/:id', 'CertificationController.destroy')
     // Level of Education
-    Route.resource('levelOfEducations', 'LevelOfEducationController').apiOnly()
+    Route.post('levelOfEducations', 'LevelOfEducationController.store')
+    Route.put('levelOfEducations/:id', 'LevelOfEducationController.update')
+    Route.delete('levelOfEducations/:id', 'LevelOfEducationController.destroy')
     // Subject
-    Route.resource('subjects', 'SubjectController').apiOnly()
-    // Offers
-    Route.resource('offers', 'OffersController').apiOnly()
+    Route.post('subjects/:id', 'SubjectController.store')
+    Route.put('subjects/:id', 'SubjectController.update')
+    Route.delete('subjects/:id', 'SubjectController.destroy')
     // Sub-LoE
   }).middleware('auth')
+
+  // Tutor
+  Route.get('tutors', 'TutorsController.index')
+  Route.get('tutors/:id', 'TutorsController.show')
+
+  // Address
+  Route.get('addresses', 'AddressController.index')
+  Route.get('addresses/:id', 'AddressController.show')
+
+  // Certifications
+  Route.get('certifications', 'CertificationController.index')
+  Route.get('certifications/:id', 'CertificationController.show')
+
+  // Level of Education
+  Route.get('levelOfEducations', 'LevelOfEducationController.index')
+  Route.get('levelOfEducations/:id', 'LevelOfEducationController.show')
+
+  // Subject
+  Route.get('subjects', 'SubjectController.index')
+  Route.get('subjects/:id', 'SubjectController.show')
+
+  // Offers
+  Route.resource('offers', 'OffersController').apiOnly()
+  // .except(['destroy'])
+
+  // Message
+  Route.resource('messages', 'MessageController').apiOnly()
 
   // Authentication
   Route.post('/register', 'AuthController.register')
