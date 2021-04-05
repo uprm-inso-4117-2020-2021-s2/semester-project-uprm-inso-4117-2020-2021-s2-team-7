@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, hasOne, column, BelongsTo, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
 import User from 'App/Models/User'
+import Address from 'App/Models/Address'
 
 export default class Tutor extends BaseModel implements APIModel {
   public requiredParams: string[] = [
@@ -23,6 +24,9 @@ export default class Tutor extends BaseModel implements APIModel {
 
   @belongsTo(() => User, { localKey: 'uid', foreignKey: 'userId' })
   public user: BelongsTo<typeof User>
+
+  @hasOne(() => Address, { localKey: 'tid', foreignKey: 'tutorId' })
+  public address: HasOne<typeof Address>
 
   @column({ columnName: 'tfirst_name' })
   public tFirstName: string

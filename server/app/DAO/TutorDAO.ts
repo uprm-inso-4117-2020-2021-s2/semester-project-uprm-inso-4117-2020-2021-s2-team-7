@@ -18,11 +18,11 @@ class TutorDAO implements BaseDAO<Tutor> {
 
   // Get all tutors.
   public async getAll(): Promise<Tutor[]> {
-    return await Tutor.query().preload('user').exec()
+    return await Tutor.query().preload('user').preload('address').exec()
   }
 
   public async getById(id: number): Promise<Tutor | null> {
-    return await Tutor.query().preload('user').where('tid', id).first()
+    return await Tutor.query().preload('user').preload('address').where('tid', id).first()
   }
 
   public async update(id: number, params: Object): Promise<Tutor | boolean> {
