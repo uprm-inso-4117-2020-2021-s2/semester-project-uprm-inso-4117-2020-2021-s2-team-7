@@ -41,7 +41,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     pg: {
       client: 'pg',
       connection: Application.inProduction
-        ? Env.get('DATABASE_URL')
+        ? Env.get('DATABASE_URL') + '?ssl=no-verify'
         : {
             host: Env.get('PG_HOST'),
             port: Env.get('PG_PORT'),
