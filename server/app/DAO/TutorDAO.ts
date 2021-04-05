@@ -16,6 +16,7 @@ class TutorDAO implements BaseDAO<Tutor> {
     return false
   }
 
+  // Get all tutors.
   public async getAll(): Promise<Tutor[]> {
     return await Tutor.query().preload('user').exec()
   }
