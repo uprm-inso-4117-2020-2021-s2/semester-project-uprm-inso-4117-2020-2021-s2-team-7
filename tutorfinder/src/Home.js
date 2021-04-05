@@ -45,9 +45,9 @@ class Home extends React.Component {
     render(){
     return (
         <div className="bod">
-            <Nav 
-            onJoinNowClick={this.onJoinNowClick.bind(this)} 
-            onSignInClick={this.onSignInClick.bind(this)} 
+            <Nav
+            onJoinNowClick={this.onJoinNowClick.bind(this)}
+            onSignInClick={this.onSignInClick.bind(this)}
             onLogoClick={this.onLogoClick.bind(this)}>
             </Nav>
             {this.state.isMainVisible && <div style={{ width: "100%", paddingTop: "30%" }}>
@@ -61,12 +61,12 @@ class Home extends React.Component {
                 <div style={{ width: '40%', marginLeft:'30%', marginTop: '8px' }}>
 
                     <form action="">
-                        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button id="button-addon2" type="submit" class="btn btn-link text-warning" style={{width:'40px'}}><i class="fa fa-search"></i></button>
+                        <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <button id="button-addon2" type="submit" className="btn btn-link text-warning" style={{width:'40px'}}><i className="fa fa-search"></i></button>
                                 </div>
-                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon2" class="form-control border-0 bg-light" style={{marginRight:'10px'}} />
+                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon2" className="form-control border-0 bg-light" style={{marginRight:'10px'}} />
                             </div>
                         </div>
                     </form>
