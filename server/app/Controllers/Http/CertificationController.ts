@@ -6,7 +6,7 @@ export default class CertificationController {
   // Get all Certification.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Certification.query().preload('tutor').exec()
+      return await Certification.query().preload('tutor').preload('levelOfEducation').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Certification.',
@@ -43,6 +43,7 @@ export default class CertificationController {
     try {
       const certification: Certification | null = await Certification.query()
         .preload('tutor')
+        .preload('levelOfEducation')
         .where('cid', params.id)
         .first()
       if (!certification) {

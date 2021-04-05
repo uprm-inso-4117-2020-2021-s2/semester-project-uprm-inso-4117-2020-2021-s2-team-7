@@ -13,6 +13,14 @@ export default class Certifications extends BaseSchema {
         .references('tid')
         .inTable('tutors')
         .onDelete('CASCADE')
+      table
+        .integer('level_of_education_id')
+        .unsigned()
+        .nullable()
+        .defaultTo(null)
+        .references('leid')
+        .inTable('level_of_educations')
+        .onDelete('CASCADE')
     })
   }
 
