@@ -1,6 +1,23 @@
 import './TutorBox.css'
+const axios = require('axios');
+const API_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
 
 function TutorBox() {
+
+{ /* state = {
+    tutors: []
+  }
+
+  componentDidMount() {
+    const url = '${API_URL}/tutors/0';
+    axios.get(url).then(response => response.data)
+    .then((data) => {
+        this.setState({ users: data })
+        console.log(this.state.users)
+    });
+  }
+*/
+}
 
     return (
         <div className="mainBox">

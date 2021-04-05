@@ -1,16 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import "./TutorInfo.css";
 import { Col, Row, Container, Button } from 'react-bootstrap';
 import pfp from "../assets/pfp.png";
 import { TiLocation, TiGlobe } from "react-icons/ti";
 
+const axios = require('axios');
+const API_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
+
 class TutorInfo extends Component {
+    state = {
+        users: []
+    }
+
+    componentDidMount(){
+        const url = '${API_URL}/tutors/0';
+        axios.get(url).then(response => response.data)
+        .then((data) => {
+            this.setState({ users: data })
+            console.log(this.state.users)
+        });
+    }
+
+
     render() {
         return(
             <Container>
                 <Row>
                     <Col className='Profile' sm={3}>
                         <img src={pfp} className="pfp" alt="pfp"/>
+
+                        {this.state.users.map((user) =>
+                            (<h3 className='Name'> {user.tfirst_name} </h3>
+                        ))}
+
                         <h3 className='Name'> Juan Del Pueblo </h3>
                         <h5> Location <TiLocation /> </h5>
                         <p> Mayaguez, PR </p>
@@ -25,6 +47,8 @@ class TutorInfo extends Component {
                         </div>
                         <ul>
                             <h5>Biography</h5>
+                            {this.state.users.map((user) =>
+                                (<p> {user.t_overview} </p> ))}
                             <p>I am currently pursuing a masters degree in the University of Puerto Rico in Mayaguez. </p>
 
                             <h5>Experience</h5>
@@ -41,8 +65,10 @@ class TutorInfo extends Component {
                             <p> Physics: $ </p>
 
                             <h5>Availability</h5>
-                            <p> Weekday daytime </p>
-                            <p> Weekday evening </p>
+                            <p> Weekday daytime: </p>
+                            <p> Weekday evening: </p>
+                            <p> Weekends: </p>
+
                         </ul>
                      </Col>
                 </Row>

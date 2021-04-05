@@ -19,10 +19,10 @@ function App() {
           crossorigin="anonymous"
         />
       </head>
-      <Home></Home>
+      {/*<Home></Home>*/}
       {/* <SignupPage></SignupPage> */}
-        {/* <Navbar fixed="top" />
-        <TutorInfo /> */}
+       <Navbar fixed="top" />
+       <TutorInfo />
         {/* <BulletinBoard></BulletinBoard> */}
         
     </div>
