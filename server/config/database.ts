@@ -19,6 +19,8 @@ const dbConnection = Env.get('DATABASE_URL', false)
       database: Env.get('PG_DB_NAME'),
     }
 
+console.debug(dbConnection)
+
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
   |--------------------------------------------------------------------------
