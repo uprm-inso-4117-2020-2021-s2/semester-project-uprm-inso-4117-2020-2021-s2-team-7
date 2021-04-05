@@ -8,18 +8,9 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import { parse } from 'pg-connection-string'
 
-const dbConnection = Env.get('DATABASE_URL', false)
-  ? Env.get('DATABASE_URL')
-  : {
-      host: Env.get('PG_HOST'),
-      port: Env.get('PG_PORT'),
-      user: Env.get('PG_USER'),
-      password: Env.get('PG_PASSWORD', ''),
-      database: Env.get('PG_DB_NAME'),
-    }
-
-console.error(dbConnection)
+const dbConnection = parse(Env.get('DATABASE_URL', ''))
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -48,7 +39,13 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     */
     pg: {
       client: 'pg',
-      connection: dbConnection,
+      connection: {
+        host: Env.get('PG_HOST', dbConnection.host),
+        port: Env.get('PG_PORT', dbConnection.port),
+        user: Env.get('PG_USER', dbConnection.user),
+        password: Env.get('PG_PASSWORD', dbConnection.password),
+        database: Env.get('PG_DB_NAME', dbConnection.database),
+      },
       healthCheck: true,
       debug: false,
     },
