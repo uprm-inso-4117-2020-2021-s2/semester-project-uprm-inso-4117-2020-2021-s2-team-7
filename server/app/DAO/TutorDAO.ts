@@ -23,6 +23,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('address')
       .preload('messages')
       .preload('certifications')
+      .preload('subjects')
       .exec()
   }
 
@@ -33,6 +34,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('address')
       .preload('messages')
       .preload('certifications')
+      .preload('subjects')
       .where('tid', id)
       .first()
   }

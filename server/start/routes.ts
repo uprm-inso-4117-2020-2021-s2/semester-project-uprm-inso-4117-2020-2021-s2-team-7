@@ -44,6 +44,7 @@ Route.group(() => {
     // Subject
     Route.resource('subjects', 'SubjectController').apiOnly()
     // Offers
+    Route.resource('offers', 'OffersController').apiOnly()
     // Sub-LoE
   }).middleware('auth')
 
