@@ -6,6 +6,7 @@ class TutorDAO implements BaseDAO<Tutor> {
     return await Tutor.create(params)
   }
 
+  // Delete Tutor.
   public async delete(id: number): Promise<boolean> {
     let tutor: Tutor | null = await this.getById(id)
     if (tutor) {
