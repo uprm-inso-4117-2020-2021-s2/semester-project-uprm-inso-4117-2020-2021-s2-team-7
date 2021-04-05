@@ -30,13 +30,12 @@ function BulletinBoard() {
                 <Select className="dropdownStyle" options={Locations} placeholder="Locations" isMulti />
             </div>
             <div className="boardBg">
-                <div style={{paddingBottom:"10vh"}} />
-                <div className="topRow" style={{display:"flex", flexDirection:"row"}}>
+                <div style={{display:"flex", flexDirection:"row"}}>
                     <TutorBox></TutorBox>
                     <TutorBox></TutorBox>
                     <TutorBox></TutorBox>
                 </div>
-                <div className="bottomRow" style={{display:"flex", flexDirection:"row"}}>
+                <div style={{display:"flex", flexDirection:"row"}}>
                     <TutorBox></TutorBox>
                     <TutorBox></TutorBox>
                     <TutorBox></TutorBox>
