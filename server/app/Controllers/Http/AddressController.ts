@@ -55,7 +55,6 @@ export default class AddressController {
   // Update existing Address.
   public async update({ request, response, params }: HttpContextContract) {
     let validParams = GenericController.getValidVariables(request, new Address(), true)
-
     if (!(validParams && params.id)) {
       return response.badRequest({ message: 'A valid id and data must be provided.' })
     }

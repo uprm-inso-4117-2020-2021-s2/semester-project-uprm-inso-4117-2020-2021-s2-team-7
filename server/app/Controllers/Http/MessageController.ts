@@ -6,7 +6,7 @@ export default class MessageController {
   // Get all Message.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Message.all()
+      return await Message.query().preload('tutor').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Message.',
@@ -36,7 +36,10 @@ export default class MessageController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const mmessage: Message | null = await Message.find(params.id)
+      const mmessage: Message | null = await Message.query()
+        .preload('tutor')
+        .where('mid', params.id)
+        .first()
       if (!mmessage) {
         return response.notFound({ message: `Message with id ${params.id} not found.` })
       }

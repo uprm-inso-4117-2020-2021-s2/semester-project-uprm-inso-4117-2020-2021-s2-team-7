@@ -6,7 +6,7 @@ export default class CertificationController {
   // Get all Certification.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Certification.all()
+      return await Certification.query().preload('tutor').preload('levelOfEducation').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Certification.',
@@ -41,7 +41,11 @@ export default class CertificationController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const certification: Certification | null = await Certification.find(params.id)
+      const certification: Certification | null = await Certification.query()
+        .preload('tutor')
+        .preload('levelOfEducation')
+        .where('cid', params.id)
+        .first()
       if (!certification) {
         return response.notFound({ message: `Certification with id ${params.id} not found.` })
       }

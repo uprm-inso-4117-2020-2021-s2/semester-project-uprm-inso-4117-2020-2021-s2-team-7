@@ -5,7 +5,7 @@ export default class Addresses extends BaseSchema {
 
   public async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('tutor_id').unique().unsigned().notNullable()
+      table.integer('tutor_id').unique().unsigned().nullable()
     })
   }
 
