@@ -52,7 +52,7 @@ Route.group(() => {
     Route.put('subjects/:id', 'SubjectController.update')
     Route.delete('subjects/:id', 'SubjectController.destroy')
     // Sub-LoE
-  }) // .middleware('auth')
+  }).middleware('auth')
 
   // Tutor
   Route.get('tutors', 'TutorsController.index')
