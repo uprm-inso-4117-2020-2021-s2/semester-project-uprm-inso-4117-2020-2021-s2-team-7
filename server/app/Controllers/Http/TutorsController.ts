@@ -1,7 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Tutor from 'App/Models/Tutor'
 import GenericController from 'App/Controllers/Http/GenericController'
-import { tutorDAO } from 'App/DAO/TutorDAO'
+import { tutorDAO } from 'App/dao/TutorDAO'
+// import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class TutorsController {
   // Get all tutors.
@@ -17,21 +18,21 @@ export default class TutorsController {
   }
 
   // Create new tutor.
-  public async store({ request, response }: HttpContextContract) {
-    const variables = GenericController.getValidVariables(request, new Tutor())
-    if (!variables) {
-      return response.badRequest({ message: 'Specify the required parameters to create a Tutor' })
-    }
-    try {
-      let createdTutor: Tutor = await tutorDAO.create(variables)
-      return response.created({ message: 'Tutor created successfully.', id: createdTutor.tid })
-    } catch (err) {
-      return response.internalServerError({
-        message: 'Server error while creating Tutor.',
-        error: err.toString(),
-      })
-    }
-  }
+  // public async store({ request, response }: HttpContextContract) {
+  //   const variables = GenericController.getValidVariables(request, new Tutor())
+  //   if (!variables) {
+  //     return response.badRequest({ message: 'Specify the required parameters to create a Tutor' })
+  //   }
+  //   try {
+  //     let createdTutor: Tutor = await tutorDAO.create(variables)
+  //     return response.created({ message: 'Tutor created successfully.', id: createdTutor.tid })
+  //   } catch (err) {
+  //     return response.internalServerError({
+  //       message: 'Server error while creating Tutor.',
+  //       error: err.toString(),
+  //     })
+  //   }
+  // }
 
   // Get tutor by id.
   public async show({ response, params }: HttpContextContract) {

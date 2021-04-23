@@ -1,23 +1,22 @@
 import { DateTime } from 'luxon'
 import {
   BaseModel,
-  belongsTo,
-  hasOne,
-  hasMany,
-  manyToMany,
+  beforeSave,
   column,
-  BelongsTo,
-  HasOne,
-  HasMany,
-  ManyToMany,
   computed,
+  hasMany,
+  HasMany,
+  hasOne,
+  HasOne,
+  manyToMany,
+  ManyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
-import User from 'App/Models/User'
 import Address from 'App/Models/Address'
 import Message from 'App/Models/Message'
 import Certification from 'App/Models/Certification'
 import Subject from 'App/Models/Subject'
+import Hash from '@ioc:Adonis/Core/Hash'
 
 export default class Tutor extends BaseModel implements APIModel {
   public serializeExtras = true
@@ -29,17 +28,21 @@ export default class Tutor extends BaseModel implements APIModel {
     'tage',
     'tsummary',
     'toverview',
-    'user_id',
+    'email',
+    'password',
   ]
 
   @column({ isPrimary: true })
   public tid: number
 
-  @column({ columnName: 'user_id' })
-  public userId: number
+  @column()
+  public email: string
 
-  @belongsTo(() => User, { localKey: 'uid', foreignKey: 'userId' })
-  public user: BelongsTo<typeof User>
+  @column({ serializeAs: null })
+  public password: string
+
+  @column()
+  public rememberMeToken?: string
 
   @hasOne(() => Address, { localKey: 'tid', foreignKey: 'tutorId' })
   public address: HasOne<typeof Address>
@@ -94,6 +97,13 @@ export default class Tutor extends BaseModel implements APIModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @beforeSave()
+  public static async hashPassword(tutor: Tutor) {
+    if (tutor.$dirty.password) {
+      tutor.password = await Hash.make(tutor.password)
+    }
+  }
 
   @computed()
   public get fullName() {

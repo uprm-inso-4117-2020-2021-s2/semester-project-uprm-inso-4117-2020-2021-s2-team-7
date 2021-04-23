@@ -9,14 +9,16 @@ export default class Tutors extends BaseSchema {
     if (!exist) {
       this.schema.createTable(this.tableName, (table) => {
         table.increments('tid')
-        table.integer('user_id').unique().notNullable().unsigned()
+        table.string('email', 255).notNullable()
+        table.string('password', 180).notNullable()
+        table.string('remember_me_token').nullable()
         table.string('tfirst_name').notNullable()
         table.string('tlast_name').notNullable()
         table.string('tphone').notNullable()
         table.string('tnationality').notNullable()
         table.integer('tage').notNullable()
         table.string('tsummary').notNullable()
-        table.string('toverview').notNullable()
+        table.text('toverview').notNullable()
         table.boolean('tweekdays_day').defaultTo(false)
         table.boolean('tweekdays_eve').defaultTo(false)
         table.boolean('tweekends').defaultTo(false)
