@@ -51,7 +51,7 @@ const authConfig: AuthConfig = {
       tokenProvider: {
         driver: 'database',
         table: 'api_tokens',
-        foreignKey: 'user_id',
+        foreignKey: 'tutor_id',
       },
 
       provider: {
@@ -74,7 +74,7 @@ const authConfig: AuthConfig = {
         | the primary key is the right choice.
         |
         */
-        identifierKey: 'uid',
+        identifierKey: 'tid',
 
         /*
         |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('App/Models/User'),
+        model: () => import('App/Models/Tutor'),
       },
     },
   },

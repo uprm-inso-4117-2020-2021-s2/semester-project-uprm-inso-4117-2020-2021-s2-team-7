@@ -32,7 +32,7 @@ Route.get('health', async ({ response }) => {
 Route.group(() => {
   Route.group(() => {
     // Tutor CRUD operations
-    Route.post('tutors', 'TutorsController.store')
+    // Route.post('tutors', 'TutorsController.store')
     Route.put('tutors/:id', 'TutorsController.update')
     Route.delete('tutors/:id', 'TutorsController.destroy')
     // Address

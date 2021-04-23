@@ -19,7 +19,6 @@ class TutorDAO implements BaseDAO<Tutor> {
   // Get all tutors.
   public async getAll(): Promise<Tutor[]> {
     return await Tutor.query()
-      .preload('user')
       .preload('address')
       .preload('messages')
       .preload('certifications')
@@ -30,7 +29,6 @@ class TutorDAO implements BaseDAO<Tutor> {
   // Get tutor by id.
   public async getById(id: number): Promise<Tutor | null> {
     return await Tutor.query()
-      .preload('user')
       .preload('address')
       .preload('messages')
       .preload('certifications')
