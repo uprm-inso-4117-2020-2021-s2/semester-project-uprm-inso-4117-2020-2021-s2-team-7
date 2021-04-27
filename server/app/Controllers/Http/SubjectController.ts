@@ -52,7 +52,6 @@ export default class SubjectController {
   // Update existing Subject.
   public async update({ request, response, params }: HttpContextContract) {
     let validParams = GenericController.getValidVariables(request, new Subject(), true)
-
     if (!(validParams && params.id)) {
       return response.badRequest({ message: 'A valid id and data must be provided.' })
     }

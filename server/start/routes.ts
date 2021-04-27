@@ -78,6 +78,9 @@ Route.group(() => {
   Route.resource('offers', 'OffersController').apiOnly()
   // .except(['destroy'])
 
+  // Sub-Level
+  Route.resource('subject-level', 'SubjectLevelController').apiOnly()
+
   // Message
   Route.resource('messages', 'MessageController').apiOnly()
 

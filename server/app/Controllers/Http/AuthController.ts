@@ -25,8 +25,8 @@ export default class AuthController {
     })
 
     try {
-      const user = await Tutor.create(data)
-      return response.created({ message: 'User registered successfully.', user })
+      const tutor = await Tutor.create(data)
+      return response.created({ message: 'Tutor registered successfully.', tutor })
     } catch (err) {
       return response.internalServerError({
         message: 'Could not create User, something went wrong.',
