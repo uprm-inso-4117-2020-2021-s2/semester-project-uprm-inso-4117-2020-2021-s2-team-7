@@ -2,6 +2,7 @@ import React from 'react';
 import './BulletinBoard.css';
 import TutorBox from './TutorBox';
 import Select from 'react-select';
+import { withRouter } from "react-router-dom";
 
 const Subjects = [
     {label: 'Calculus I', value: 'Calculus I'},
@@ -45,4 +46,4 @@ function BulletinBoard() {
     );
 }
 
-export default BulletinBoard;
+export default withRouter(BulletinBoard);

@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import Nav from './Nav.js';
 import SignupPage from "./SignupPage";
 import Login from "./Login";
-
+import { withRouter } from "react-router-dom";
 
 class Home extends React.Component {
 
@@ -79,4 +79,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default withRouter(Home);

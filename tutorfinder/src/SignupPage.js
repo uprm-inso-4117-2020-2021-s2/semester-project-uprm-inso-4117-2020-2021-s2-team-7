@@ -3,6 +3,7 @@ import "./App.css";
 import "./SignupPage.css"
 import { Input, FormGroup, Label, Form, Button, Col } from 'reactstrap';
 import axios from 'axios';
+import { withRouter } from "react-router-dom";
 
 const SERVER_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
 
@@ -111,20 +112,17 @@ class SignupPage extends React.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const new_user = {
-      email: this.state.email,
-      password: this.state.password,
-      password_confirmation: this.state.confirm_password
-    }
-    let user;
+
     let login = {
       email: this.state.email,
       password: this.state.password
     }
     let tutor = {
+      email: this.state.email,
+      password: this.state.password,
+      password_confirmation: this.state.confirm_password,
       tfirst_name: this.state.firstName,
       tlast_name: this.state.lastName,
-      user_id: 0,
       tphone: this.state.phoneNumber,
       tnationality: this.state.nationality,
       tage: 0,
@@ -135,26 +133,26 @@ class SignupPage extends React.Component {
       t_weekends: this.state.weekends
     }
     let tutorId;
-    await axios.post(SERVER_URL + 'register', new_user).then(res => {
+    let success =false;
+    await axios.post(SERVER_URL + 'register', tutor).then(res => {
       console.log(res);
-      user = res.data.user;
-      tutor.user_id = res.data.user.uid;
+      tutorId = res.data.user.tid;
     });
     await axios.post(SERVER_URL + 'login', login).then(res => {
       console.log(res);
-      localStorage.setItem('auth_token', res.data.token.token)
-    });
-    await axios.post(SERVER_URL + 'tutors', tutor, { headers: {"Authorization" : `Bearer ${localStorage.getItem('auth_token')}`}}).then(res => {
-      console.log(res);
-      tutorId = res.data.id
+      localStorage.setItem('auth_token', res.data.token.token);
+      success = true;
     });
     this.state.checkedSubjects.forEach(subjectId => {
       const new_obj = {
         subject_id: subjectId,
         tutor_id: tutorId
       }
-      axios.post(SERVER_URL + 'offers', new_obj).then(res => console.log(res));
+      axios.post(SERVER_URL + 'offers', new_obj, { headers: {"Authorization" : `Bearer ${localStorage.getItem('auth_token')}`}}).then(res => console.log(res));
     });
+    if(success) {
+      this.props.history.push('/bulletin');
+    }
   }
 
   render() {
@@ -340,7 +338,7 @@ class SignupPage extends React.Component {
                 </FormGroup>
               </Col>
               <div className="text-right">
-                <Button color="danger" type="submit" className="text-right"  >Done</Button>
+                <Button color="danger" type="submit" className="text-right">Done</Button>
               </div>
             </Form>
             <br></br>
@@ -351,4 +349,4 @@ class SignupPage extends React.Component {
   }
 }
 
-export default SignupPage;
+export default withRouter(SignupPage);

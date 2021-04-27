@@ -5,8 +5,9 @@ import './App.css';
 import Home from './Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BulletinBoard from './BulletinBoard';
-import Nav from './Nav.js';
 import SignupPage from "./SignupPage";
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+
 
 function App() {
   return (
@@ -19,11 +20,29 @@ function App() {
           crossOrigin="anonymous"
         />
       </head>
-      <Home></Home>
-      {/* <SignupPage></SignupPage> */}
-        {/* <Navbar fixed="top" />
-        <TutorInfo /> */}
-        {/* <BulletinBoard></BulletinBoard> */}
+      <BrowserRouter>
+        <Switch>
+
+          <Route path="/home">
+            <Home></Home>
+          </Route>
+          <Route path="/signup">
+            <SignupPage></SignupPage>
+          </Route>
+          <Route path="/tutorInfo/:tid">
+            <Navbar fixed="top" />
+            <TutorInfo />
+          </Route>
+          <Route path="/bulletin">
+            <BulletinBoard></BulletinBoard>
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+
+        </Switch>
+      </BrowserRouter>
+
     </div>
   );
 }
