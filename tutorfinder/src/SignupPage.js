@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
-import "./SignupPage.css"
+import "./SignupPage.css";
 import { Input, FormGroup, Label, Form, Button, Col } from 'reactstrap';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
+import Select from 'react-select';
 
 const SERVER_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
 
+const modalityOptions =  [{value: 'online', label:'online'}, {value: 'in person', label: 'in person'}];
 class SignupPage extends React.Component {
 
   constructor(props) {
@@ -26,12 +28,17 @@ class SignupPage extends React.Component {
       change: false,
       weekdays_day: false,
       weekdays_eve: false,
-      weekends: false
+      weekends: false,
+      modality: 'online',
+      educOptions: [],
+      educId: '',
+      rate: 0
     }
   }
 
   componentDidMount() {
     this.getSubjects();
+    this.getEducOptions();
   }
 
   async getSubjects() {
@@ -43,6 +50,22 @@ class SignupPage extends React.Component {
     })
     this.setState({change: true});
   }
+
+  async getEducOptions() {
+    await axios.get(SERVER_URL +'levelOfEducations').then(res => {
+        console.log(res);
+        res.data.map(educ => {
+            const new_educ = {
+                value: educ.leid,
+                label: educ.le_name
+            }
+            this.state.educOptions.push(new_educ);
+        });
+        this.setState({
+            change: true
+        })
+    })
+}
 
   handleFirstNameChange(e) {
     this.setState({ firstName: e.target.value })
@@ -79,6 +102,9 @@ class SignupPage extends React.Component {
   handleOverviewChange(e) {
     this.setState({ overview: e.target.value })
   }
+  handleRateChange(e) {
+    this.setState({ rate: e.target.value })
+  }
 
   handleSubjectsCheck(e) {
     console.log(e.target.id);
@@ -93,6 +119,17 @@ class SignupPage extends React.Component {
       }
     }
     console.log(this.state.checkedSubjects);
+  }
+
+  handleModalityChange(e) {
+    console.log(e);
+    this.setState({modality: e.value});
+
+  }
+
+  handleEducChange(e) {
+    console.log(e);
+    this.setState({educId: e.value});
   }
 
   handleWeekdaysDayCheck(e) {
@@ -130,13 +167,13 @@ class SignupPage extends React.Component {
       toverview: this.state.overview,
       t_weekdays_day: this.state.weekdays_day,
       t_weekdays_eve: this.state.weekdays_eve,
-      t_weekends: this.state.weekends
+      t_weekends: this.state.weekends,
     }
     let tutorId;
     let success =false;
     await axios.post(SERVER_URL + 'register', tutor).then(res => {
       console.log(res);
-      tutorId = res.data.user.tid;
+      tutorId = res.data.tutor.tid;
     });
     await axios.post(SERVER_URL + 'login', login).then(res => {
       console.log(res);
@@ -144,9 +181,12 @@ class SignupPage extends React.Component {
       success = true;
     });
     this.state.checkedSubjects.forEach(subjectId => {
-      const new_obj = {
+      let new_obj = {
         subject_id: subjectId,
-        tutor_id: tutorId
+        tutor_id: tutorId,
+        modality: this.state.modality,
+        level_of_education_id: this.state.educId,
+        hourly_rate: this.state.rate
       }
       axios.post(SERVER_URL + 'offers', new_obj, { headers: {"Authorization" : `Bearer ${localStorage.getItem('auth_token')}`}}).then(res => console.log(res));
     });
@@ -315,6 +355,49 @@ class SignupPage extends React.Component {
                         </div>
                       )
                     )}
+                  </div>
+                </FormGroup>
+              </Col>
+              <Col className="">
+                <FormGroup inline>
+                  <div className="text-left">
+                    <Label >Level of Education</Label>
+                    <Select
+                    className="dropdw"
+                    placeholder="Modality"
+                    options={this.state.educOptions}
+                    isMulti={false}
+                    onChange={this.handleEducChange.bind(this)}
+                  />
+                  </div>
+                </FormGroup>
+              </Col>
+              <Col className="">
+                <FormGroup inline>
+                  <div className="text-left">
+                    <Label >Modality</Label>
+                    <Select
+                    className="dropdw"
+                    placeholder="Modality"
+                    options={modalityOptions}
+                    isMulti={false}
+                    onChange={this.handleModalityChange.bind(this)}
+                  />
+                  </div>
+                </FormGroup>
+              </Col>
+              <Col className="">
+                <FormGroup inline>
+                  <div className="text-left">
+                    <Label >Hourly Rate</Label>
+                    <Input
+                    type="number"
+                    name="rate"
+                    id="rate"
+                    placeholder="Indicate hourly rate"
+                    className="size"
+                    onChange={this.handleRateChange.bind(this)}
+                  />
                   </div>
                 </FormGroup>
               </Col>

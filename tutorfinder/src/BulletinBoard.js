@@ -8,15 +8,20 @@ import axios from "axios";
 const SERVER_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
 class BulletinBoard extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
-            tutors: []
+            tutors: [],
+            subjectOptions: [],
+            educOptions: [],
+            changes: false
         }
     }
 
     componentDidMount() {
         this.getTutors();
+        this.getSubjectOptions();
+        this.getEducOptions();
     }
 
     async getTutors() {
@@ -28,18 +33,45 @@ class BulletinBoard extends React.Component {
         })
     }
 
+    async getSubjectOptions() {
+        await axios.get(SERVER_URL + 'subjects').then(res => {
+            console.log(res);
+            res.data.map(sub => {
+                const new_obj = {
+                    value: sub.sid,
+                    label: sub.s_name
+                }
+                this.state.subjectOptions.push(new_obj);
+            });
+            this.setState({changes: true});
+        });
+    }
+
+    async getEducOptions() {
+        await axios.get(SERVER_URL +'levelOfEducations').then(res => {
+            console.log(res);
+            res.data.map(educ => {
+                const new_educ = {
+                    value: educ.leid,
+                    label: educ.le_name
+                }
+                this.state.educOptions.push(new_educ);
+            });
+            this.setState({
+                changes: true
+            })
+        })
+    }
+
     firstRowTutors() {
-        return(
-            this.state.tutors.map((tutor,i) => (
-               (i < 3) &&
-                    <TutorBox 
+        return (
+            this.state.tutors.map((tutor, i) => (
+                (i < 3) &&
+                <TutorBox
                     tutorId={tutor?.tid}
                     firstName={tutor?.t_first_name}
                     lastName={tutor?.t_last_name}
                     nationality={tutor?.t_nationality}
-                    subject1={tutor?.subjects[0]?.s_name}
-                    subject2={tutor?.subjects[1]?.s_name}
-                    subject3={tutor?.subjects[2]?.s_name}
                     overview={tutor?.t_overview}
                 />
             ))
@@ -47,17 +79,14 @@ class BulletinBoard extends React.Component {
     }
 
     secRowTutors() {
-        return(
-            this.state.tutors.map((tutor,i) => (
-               (i >= 3) && (i < 6) &&
-                    <TutorBox
+        return (
+            this.state.tutors.map((tutor, i) => (
+                (i >= 3) && (i < 6) &&
+                <TutorBox
                     tutorId={tutor?.tid}
                     firstName={tutor?.t_first_name}
                     lastName={tutor?.t_last_name}
                     nationality={tutor?.t_nationality}
-                    subject1={tutor?.subjects[0]?.s_name}
-                    subject2={tutor?.subjects[1]?.s_name}
-                    subject3={tutor?.subjects[2]?.s_name}
                     overview={tutor?.t_overview}
                 />
             ))
@@ -68,16 +97,16 @@ class BulletinBoard extends React.Component {
         return (
             <div className="mainBg">
                 <div className="optionsBg">
-                    <Select className="dropdownStyle" options={[]} placeholder="Subjects" isMulti />
-                    <Select className="dropdownStyle" options={[]} placeholder="Locations" isMulti />
+                    <Select className="dropdownStyle" options={this.state.subjectOptions} placeholder="Subjects" isMulti />
+                    <Select className="dropdownStyle" options={this.state.educOptions} placeholder="Level of Education" isMulti />
                     <button className="pageButton">Previous</button>
                     <button className="pageButton">Next</button>
                 </div>
-                <div className="boardBg">        
-                    <div style={{display:"flex", flexDirection:"row"}}>
+                <div className="boardBg">
+                    <div style={{ display: "flex", flexDirection: "row" }}>
                         {this.firstRowTutors()}
                     </div>
-                    <div style={{display:"flex", flexDirection:"row"}}>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
                         {this.secRowTutors()}
                     </div>
                 </div>
