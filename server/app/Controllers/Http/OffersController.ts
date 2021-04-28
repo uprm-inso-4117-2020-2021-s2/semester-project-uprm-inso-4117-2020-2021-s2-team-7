@@ -3,9 +3,21 @@ import Offer from 'App/Models/Offer'
 import GenericController from 'App/Controllers/Http/GenericController'
 
 export default class OffersController {
-  public async index({ response }: HttpContextContract) {
+  public async index({ request, response }: HttpContextContract) {
+    const { tutorId } = request.all()
     try {
-      return await Offer.all()
+      if (tutorId)
+        return await Offer.query()
+          .preload('tutor')
+          .preload('subject')
+          .preload('levelOfEducation')
+          .where('tutor_id', '=', tutorId)
+          .exec()
+      return await Offer.query()
+        .preload('tutor')
+        .preload('subject')
+        .preload('levelOfEducation')
+        .exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Offers.',
@@ -33,7 +45,12 @@ export default class OffersController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const offer: Offer | null = await Offer.find(params.id)
+      const offer: Offer | null = await Offer.query()
+        .preload('tutor')
+        .preload('subject')
+        .preload('levelOfEducation')
+        .where('oid', params.id)
+        .first()
       if (!offer) {
         return response.notFound({ message: `Offer with id ${params.id} not found.` })
       }

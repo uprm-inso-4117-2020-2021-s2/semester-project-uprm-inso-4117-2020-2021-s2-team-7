@@ -6,7 +6,7 @@ export default class LevelOfEducationController {
   // Get all LevelOfEducation.
   public async index({ response }: HttpContextContract) {
     try {
-      return await LevelOfEducation.all()
+      return await LevelOfEducation.query().preload('certifications').preload('offers').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all LevelOfEducation.',
@@ -41,7 +41,10 @@ export default class LevelOfEducationController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const levelOfEducation: LevelOfEducation | null = await LevelOfEducation.find(params.id)
+      const levelOfEducation: LevelOfEducation | null = await LevelOfEducation.query()
+        .preload('certifications')
+        .preload('offers')
+        .first()
       if (!levelOfEducation) {
         return response.notFound({ message: `LevelOfEducation with id ${params.id} not found.` })
       }

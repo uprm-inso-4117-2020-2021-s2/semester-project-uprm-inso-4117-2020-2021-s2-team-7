@@ -2,13 +2,18 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Tutor from 'App/Models/Tutor'
 import GenericController from 'App/Controllers/Http/GenericController'
 import { tutorDAO } from 'App/dao/TutorDAO'
-// import { schema, rules } from '@ioc:Adonis/Core/Validator'
 
 export default class TutorsController {
   // Get all tutors.
-  public async index({ response }: HttpContextContract) {
+  public async index({ request, response }: HttpContextContract) {
+    let { subjectId, nationality, levelOfEducation } = request.all()
     try {
-      return await tutorDAO.getAll()
+      if (subjectId && levelOfEducation) {
+        return await tutorDAO.getAllRelationshipInId(subjectId, levelOfEducation)
+      } else if (subjectId || levelOfEducation)
+        return await tutorDAO.getAllRelationshipInId(subjectId || levelOfEducation)
+      else if (nationality) return await tutorDAO.getByField('tnationality', nationality)
+      else return await tutorDAO.getAll()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Tutors.',

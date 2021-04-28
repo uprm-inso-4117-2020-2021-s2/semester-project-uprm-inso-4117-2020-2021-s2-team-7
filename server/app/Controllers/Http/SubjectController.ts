@@ -6,7 +6,7 @@ export default class SubjectController {
   // Get all Subject.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Subject.all()
+      return await Subject.query().preload('offers').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Subject.',
@@ -36,7 +36,10 @@ export default class SubjectController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const subject: Subject | null = await Subject.find(params.id)
+      const subject: Subject | null = await Subject.query()
+        .preload('offers')
+        .where('sid', params.id)
+        .first()
       if (!subject) {
         return response.notFound({ message: `Subject with id ${params.id} not found.` })
       }
@@ -52,7 +55,6 @@ export default class SubjectController {
   // Update existing Subject.
   public async update({ request, response, params }: HttpContextContract) {
     let validParams = GenericController.getValidVariables(request, new Subject(), true)
-
     if (!(validParams && params.id)) {
       return response.badRequest({ message: 'A valid id and data must be provided.' })
     }

@@ -1,22 +1,11 @@
 import { DateTime } from 'luxon'
-import {
-  BaseModel,
-  beforeSave,
-  column,
-  computed,
-  hasMany,
-  HasMany,
-  hasOne,
-  HasOne,
-  manyToMany,
-  ManyToMany,
-} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeSave, column, computed, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
 import Address from 'App/Models/Address'
 import Message from 'App/Models/Message'
 import Certification from 'App/Models/Certification'
-import Subject from 'App/Models/Subject'
 import Hash from '@ioc:Adonis/Core/Hash'
+import Offer from 'App/Models/Offer'
 
 export default class Tutor extends BaseModel implements APIModel {
   public serializeExtras = true
@@ -53,14 +42,8 @@ export default class Tutor extends BaseModel implements APIModel {
   @hasMany(() => Certification, { localKey: 'tid', foreignKey: 'tutorId' })
   public certifications: HasMany<typeof Certification>
 
-  @manyToMany(() => Subject, {
-    pivotTable: 'offers',
-    localKey: 'tid',
-    pivotForeignKey: 'tutor_id',
-    relatedKey: 'sid',
-    pivotRelatedForeignKey: 'subject_id',
-  })
-  public subjects: ManyToMany<typeof Subject>
+  @hasMany(() => Offer, { localKey: 'tid', foreignKey: 'tutorId' })
+  public offers: HasMany<typeof Offer>
 
   @column({ columnName: 'tfirst_name' })
   public tFirstName: string
