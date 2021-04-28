@@ -6,13 +6,13 @@ import { tutorDAO } from 'App/dao/TutorDAO'
 export default class TutorsController {
   // Get all tutors.
   public async index({ request, response }: HttpContextContract) {
-    let { subjectId, nationality, levelOfEducation } = request.all()
+    let { subjectId, levelOfEducation, languageId } = request.all()
     try {
       if (subjectId && levelOfEducation) {
         return await tutorDAO.getAllRelationshipInId(subjectId, levelOfEducation)
       } else if (subjectId || levelOfEducation)
         return await tutorDAO.getAllRelationshipInId(subjectId || levelOfEducation)
-      else if (nationality) return await tutorDAO.getByField('tnationality', nationality)
+      else if (languageId) return await tutorDAO.getByLanguage(languageId)
       else return await tutorDAO.getAll()
     } catch (err) {
       return response.internalServerError({
@@ -22,7 +22,7 @@ export default class TutorsController {
     }
   }
 
-  // Create new tutor.
+  // Create new tutor
   // public async store({ request, response }: HttpContextContract) {
   //   const variables = GenericController.getValidVariables(request, new Tutor())
   //   if (!variables) {

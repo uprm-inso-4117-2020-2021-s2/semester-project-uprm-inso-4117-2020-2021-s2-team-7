@@ -51,7 +51,14 @@ Route.group(() => {
     Route.post('subjects', 'SubjectController.store')
     Route.put('subjects/:id', 'SubjectController.update')
     Route.delete('subjects/:id', 'SubjectController.destroy')
-    // Sub-LoE
+    // Speaks
+    Route.post('speaks', 'SpeaksController.store')
+    Route.put('speaks/:id', 'SpeaksController.update')
+    Route.delete('speaks/:id', 'SpeaksController.destroy')
+    // Offers
+    Route.post('offers', 'OffersController.store')
+    Route.put('offers/:id', 'OffersController.update')
+    Route.delete('offers/:id', 'OffersController.destroy')
   }).middleware('auth')
 
   // Tutor
@@ -75,10 +82,15 @@ Route.group(() => {
   Route.get('subjects/:id', 'SubjectController.show')
 
   // Offers
-  Route.resource('offers', 'OffersController').apiOnly()
+  Route.get('offers', 'OffersController.index')
+  Route.get('offers/:id', 'OffersController.show')
 
-  // Sub-Level
-  // Route.resource('subject-level', 'SubjectLevelsController').apiOnly()
+  // Languages
+  Route.get('languages', 'LanguagesController.index')
+
+  // Speaks
+  Route.get('speaks', 'SpeaksController.index')
+  Route.get('speaks/:id', 'SpeaksController.show')
 
   // Message
   Route.resource('messages', 'MessageController').apiOnly()
