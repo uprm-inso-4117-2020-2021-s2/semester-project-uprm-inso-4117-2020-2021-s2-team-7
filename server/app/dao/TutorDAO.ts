@@ -1,5 +1,6 @@
 import Tutor from 'App/Models/Tutor'
 import Offer from 'App/Models/Offer'
+import Speak from 'App/Models/Speak'
 
 class TutorDAO implements BaseDAO<Tutor> {
   // Create Tutor.
@@ -24,6 +25,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('messages')
       .preload('certifications')
       .preload('offers')
+      .preload('languages')
       .exec()
   }
 
@@ -34,17 +36,20 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('messages')
       .preload('certifications')
       .preload('offers')
+      .preload('languages')
       .where('tid', id)
       .first()
   }
 
-  public async getByField(field: string, value: any): Promise<Tutor[]> {
+  public async getByLanguage(lid: number): Promise<Tutor[]> {
+    let subquery = Speak.query().select('tutor_id').where('language_id', '=', lid)
     return await Tutor.query()
       .preload('address')
       .preload('messages')
       .preload('certifications')
       .preload('offers')
-      .where(field, value)
+      .preload('languages')
+      .whereIn('tid', subquery)
       .exec()
   }
 
@@ -56,6 +61,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('messages')
       .preload('certifications')
       .preload('offers')
+      .preload('languages')
       .whereIn('tid', subquery)
     return await query.exec()
   }

@@ -1,11 +1,23 @@
 import { DateTime } from 'luxon'
-import { BaseModel, beforeSave, column, computed, hasMany, HasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  beforeSave,
+  column,
+  computed,
+  hasMany,
+  HasMany,
+  hasOne,
+  HasOne,
+  manyToMany,
+  ManyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
 import Address from 'App/Models/Address'
 import Message from 'App/Models/Message'
 import Certification from 'App/Models/Certification'
 import Hash from '@ioc:Adonis/Core/Hash'
 import Offer from 'App/Models/Offer'
+import Language from 'App/Models/Language'
 
 export default class Tutor extends BaseModel implements APIModel {
   public serializeExtras = true
@@ -13,12 +25,14 @@ export default class Tutor extends BaseModel implements APIModel {
     'tfirst_name',
     'tlast_name',
     'tphone',
-    'tnationality',
     'tage',
     'tsummary',
     'toverview',
     'email',
     'password',
+    'tweekdays_day',
+    'tweekdays_day',
+    'tweekends',
   ]
 
   @column({ isPrimary: true })
@@ -45,6 +59,15 @@ export default class Tutor extends BaseModel implements APIModel {
   @hasMany(() => Offer, { localKey: 'tid', foreignKey: 'tutorId' })
   public offers: HasMany<typeof Offer>
 
+  @manyToMany(() => Language, {
+    pivotTable: 'speaks',
+    localKey: 'tid',
+    pivotForeignKey: 'tutor_id',
+    relatedKey: 'lid',
+    pivotRelatedForeignKey: 'language_id',
+  })
+  public languages: ManyToMany<typeof Language>
+
   @column({ columnName: 'tfirst_name' })
   public tFirstName: string
 
@@ -53,9 +76,6 @@ export default class Tutor extends BaseModel implements APIModel {
 
   @column({ columnName: 'tphone' })
   public tPhone: string
-
-  @column({ columnName: 'tnationality' })
-  public tNationality: string
 
   @column({ columnName: 'tage' })
   public tAge: number
@@ -69,7 +89,7 @@ export default class Tutor extends BaseModel implements APIModel {
   @column({ columnName: 'tweekdays_day' })
   public tWeekdaysDay: boolean
 
-  @column({ columnName: 'tweekdays_eve' })
+  @column({ columnName: 'tweekdays_day' })
   public tWeekdaysEve: boolean
 
   @column({ columnName: 'tweekends' })

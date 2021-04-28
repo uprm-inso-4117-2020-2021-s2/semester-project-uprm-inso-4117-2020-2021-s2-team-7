@@ -10,7 +10,6 @@ export default class AuthController {
       tfirst_name: schema.string({}),
       tlast_name: schema.string({}),
       tphone: schema.string({}),
-      tnationality: schema.string({}),
       tage: schema.number([rules.unsigned()]),
       tsummary: schema.string({}),
       toverview: schema.string({}),
