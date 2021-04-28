@@ -22,7 +22,7 @@ export default class TutorsController {
     }
   }
 
-  // Create new tutor.
+  // Create new tutor
   // public async store({ request, response }: HttpContextContract) {
   //   const variables = GenericController.getValidVariables(request, new Tutor())
   //   if (!variables) {
