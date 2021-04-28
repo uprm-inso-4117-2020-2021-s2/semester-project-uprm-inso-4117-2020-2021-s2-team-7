@@ -63,6 +63,15 @@ class BulletinBoard extends React.Component {
         })
     }
 
+    getSubjectArrByTutor(tutor) {
+        const subArr=[]
+        tutor.offers.map(off => {
+            subArr.push(off.subject_id);
+        })
+        console.log(subArr);
+        return subArr
+    }
+
     firstRowTutors() {
         return (
             this.state.tutors.map((tutor, i) => (
@@ -73,6 +82,7 @@ class BulletinBoard extends React.Component {
                     lastName={tutor?.t_last_name}
                     nationality={tutor?.t_nationality}
                     overview={tutor?.t_overview}
+                    subjectArr={this.getSubjectArrByTutor(tutor)}
                 />
             ))
         );
@@ -88,6 +98,7 @@ class BulletinBoard extends React.Component {
                     lastName={tutor?.t_last_name}
                     nationality={tutor?.t_nationality}
                     overview={tutor?.t_overview}
+                    hourlyRate = {tutor?.offers[0].hourly_rate}
                 />
             ))
         );
