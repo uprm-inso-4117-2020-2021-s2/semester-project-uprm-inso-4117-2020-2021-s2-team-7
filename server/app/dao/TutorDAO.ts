@@ -1,4 +1,5 @@
 import Tutor from 'App/Models/Tutor'
+import Offer from 'App/Models/Offer'
 
 class TutorDAO implements BaseDAO<Tutor> {
   // Create Tutor.
@@ -22,7 +23,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('address')
       .preload('messages')
       .preload('certifications')
-      .preload('subjects')
+      .preload('offers')
       .exec()
   }
 
@@ -32,7 +33,7 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('address')
       .preload('messages')
       .preload('certifications')
-      .preload('subjects')
+      .preload('offers')
       .where('tid', id)
       .first()
   }
@@ -42,39 +43,21 @@ class TutorDAO implements BaseDAO<Tutor> {
       .preload('address')
       .preload('messages')
       .preload('certifications')
-      .preload('subjects')
+      .preload('offers')
       .where(field, value)
       .exec()
   }
 
-  public async getAllRelationshipHasId(id: number, id2: number = 0): Promise<Tutor[]> {
+  public async getAllRelationshipInId(id: number, id2: number = 0): Promise<Tutor[]> {
+    let subquery = Offer.query().select('tutor_id').where('subject_id', '=', id)
+    if (id2 !== 0) subquery = subquery.andWhere('level_of_education_id', '=', id2)
     let query = Tutor.query()
       .preload('address')
       .preload('messages')
       .preload('certifications')
-      .preload('subjects')
-      .whereHas(
-        'subjects',
-        (builder) => {
-          if (id2 !== 0)
-            builder
-              .preload('levelOfEducations')
-              .whereHas(
-                'levelOfEducations',
-                (builder2) => {
-                  builder2.where('leid', '=', id2)
-                },
-                '>=',
-                1
-              )
-              .andWhere('sid', '=', id)
-          else builder.where('sid', '=', id)
-          // builder.where('sid', '=', id)
-        },
-        '>=',
-        1
-      )
-    return await query.exec() // .has(rel, '=', id).exec()
+      .preload('offers')
+      .whereIn('tid', subquery)
+    return await query.exec()
   }
 
   public async update(id: number, params: Object): Promise<Tutor | boolean> {
