@@ -49,7 +49,6 @@ test.group('Tutor creation', async () =>  {
   test('Tutor not created, need more information', async (assert) => {
     await supertest(BASE_URL).post('/tutorFinder/register').send({"email": "juan.delpueblo@upr.edu",
       }).expect(422)
-
   })
 
   test('Creates message successfully', async (assert) => {
