@@ -47,20 +47,34 @@ class TutorDAO implements BaseDAO<Tutor> {
       .exec()
   }
 
-  public async getAllRelationshipHasId(
-    rel: any,
-    id: number,
-    rel2?: any,
-    id2?: number
-  ): Promise<Tutor[]> {
+  public async getAllRelationshipHasId(id: number, id2: number = 0): Promise<Tutor[]> {
     let query = Tutor.query()
       .preload('address')
       .preload('messages')
       .preload('certifications')
       .preload('subjects')
-      .has(rel, '=', id)
-    if (rel2 && id2) query = query.andHas(rel2, '=', id2)
-    return await query.exec()
+      .whereHas(
+        'subjects',
+        (builder) => {
+          if (id2 !== 0)
+            builder
+              .preload('levelOfEducations')
+              .whereHas(
+                'levelOfEducations',
+                (builder2) => {
+                  builder2.where('leid', '=', id2)
+                },
+                '>=',
+                1
+              )
+              .andWhere('sid', '=', id)
+          else builder.where('sid', '=', id)
+          // builder.where('sid', '=', id)
+        },
+        '>=',
+        1
+      )
+    return await query.exec() // .has(rel, '=', id).exec()
   }
 
   public async update(id: number, params: Object): Promise<Tutor | boolean> {

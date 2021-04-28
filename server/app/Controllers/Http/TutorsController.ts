@@ -7,10 +7,13 @@ import { tutorDAO } from 'App/dao/TutorDAO'
 export default class TutorsController {
   // Get all tutors.
   public async index({ request, response }: HttpContextContract) {
-    let { subjectId, nationality } = request.all()
+    let { subjectId, nationality, levelOfEducation } = request.all()
     try {
-      if (subjectId) return await tutorDAO.getAllRelationshipHasId('subjects', subjectId)
-      else if (nationality) return await tutorDAO.getByField('tnationality', nationality)
+      if (subjectId) {
+        if (levelOfEducation)
+          return await tutorDAO.getAllRelationshipHasId(subjectId, levelOfEducation)
+        return await tutorDAO.getAllRelationshipHasId(subjectId)
+      } else if (nationality) return await tutorDAO.getByField('tnationality', nationality)
       else return await tutorDAO.getAll()
     } catch (err) {
       return response.internalServerError({

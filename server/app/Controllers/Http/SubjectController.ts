@@ -6,7 +6,7 @@ export default class SubjectController {
   // Get all Subject.
   public async index({ response }: HttpContextContract) {
     try {
-      return await Subject.all()
+      return await Subject.query().preload('levelOfEducations').exec()
     } catch (err) {
       return response.internalServerError({
         message: 'Server error while getting all Subject.',
@@ -36,7 +36,10 @@ export default class SubjectController {
   public async show({ response, params }: HttpContextContract) {
     if (!params.id) return response.badRequest({ message: 'A valid id must be provided.' })
     try {
-      const subject: Subject | null = await Subject.find(params.id)
+      const subject: Subject | null = await Subject.query()
+        .preload('levelOfEducations')
+        .where('sid', params.id)
+        .first()
       if (!subject) {
         return response.notFound({ message: `Subject with id ${params.id} not found.` })
       }
@@ -56,7 +59,10 @@ export default class SubjectController {
       return response.badRequest({ message: 'A valid id and data must be provided.' })
     }
     try {
-      let subject: Subject | null = await Subject.find(params.id)
+      let subject: Subject | null = await Subject.query()
+        .preload('levelOfEducations')
+        .where('sid', params.id)
+        .first()
       if (!subject)
         return response.notFound({ message: `Could not find Subject with id: ${params.id}` })
       subject.merge(validParams)
