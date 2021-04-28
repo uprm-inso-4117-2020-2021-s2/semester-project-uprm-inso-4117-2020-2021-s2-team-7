@@ -1,54 +1,80 @@
 import React, { Component } from 'react';
 import "./TutorInfo.css";
 import { Col, Row, Container, Button } from 'react-bootstrap';
-import pfp from "../assets/pfp.png";
-import { TiLocation, TiGlobe } from "react-icons/ti";
+import { TiLocation, TiBook } from "react-icons/ti";
+import axios from 'axios';
+import { withRouter } from "react-router-dom";
 
+const SERVER_URL = 'https://tutor-finder-server.herokuapp.com/tutorFinder/';
 class TutorInfo extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            tutor: ''
+        }
+    }
+
+    componentDidMount() {
+        const tutorId = this.props.match?.params.tid;
+        this.getTutorById(tutorId);
+    }
+
+    async getTutorById(tid) {
+        await axios.get(SERVER_URL + 'tutors/' + tid).then(res => {
+            console.log(res);
+            this.setState({
+                tutor: res.data
+            })
+        })
+    }
+
+
     render() {
         return(
-            <Container>
-                <Row>
-                    <Col className='Profile' sm={3}>
-                        <img src={pfp} className="pfp" alt="pfp"/>
-                        <h3 className='Name'> Juan Del Pueblo </h3>
-                        <h5> Location <TiLocation /> </h5>
-                        <p> Mayaguez, PR </p>
-                        <h5> Languages <TiGlobe /> </h5>
-                        <p> English, Spanish </p>
-                        <Button className='msgbutton' variant="primary"> Send Message </Button>{''}
-                     </Col>
+            <div className="mainBg">
+                <Container>
+                    <Row>
+                        <Col className='Profile' sm={3}>
+                            <h3 className='Name'> 
+                            {this.state.tutor.fullName} </h3>
+                            <h5> Nationality <TiLocation /> </h5>
+                            <p> {this.state.tutor.t_nationality} </p>
+                            <h5> Subjects <TiBook /> </h5>
+                            {this.state.tutor.subjects?.map(sub => (
+                                <p>{sub.s_name}</p>
+                            ))}
+                        </Col>
 
-                     <Col className='Info' sm={{ span: 8, offset: 1 }}>
-                        <div className='More'>
-                            <h1> More About This User </h1>
-                        </div>
-                        <ul>
-                            <h5>Biography</h5>
-                            <p>I am currently pursuing a masters degree in the University of Puerto Rico in Mayaguez. </p>
+                        <Col className='Info' sm={{ span: 8, offset: 1 }}>
+                            <div className='More'>
+                                <h1> More About This User </h1>
+                            </div>
+                            <ul>
+                                <h5>Summary</h5>
+                                <p>{this.state.tutor.t_summary} </p>
 
-                            <h5>Experience</h5>
-                            <p> I have been tutoring for 2 years, working with students of all ages. </p>
-                            <p> I aim to learn about my students strengths in order to cater my teaching to their needs. </p>
+                                <h5>Overview</h5>
+                                <p style={{display:"block", wordWrap:"break-word", whiteSpace:"normal"}}> {this.state.tutor.t_overview} </p>
 
-                            <h5>Subjects</h5>
-                            <p> Math: Pre-calculus, Calculus, Calculus II</p>
-                            <p> Science: Physics </p>
+                                <h5>Availability</h5>
+                                {this.state.tutor.t_weekdays_day && <p>Weekdays during the Day</p>}
+                                {this.state.tutor.t_weekdays_eve && <p>Weekdays during the Evening</p>}
+                                {this.state.tutor.t_weekends && <p>Weekends</p>}
+                                {!this.state.tutor.t_weekdays_day && 
+                                !this.state.tutor.t_weekdays_eve && 
+                                !this.state.tutor.t_weekends && 
+                                <p>Contact Tutor for Availability</p>}
 
-                            <h5>Rates</h5>
-                            <p> Pre-calculus: $ </p>
-                            <p> Calculus/Calculus II: $ </p>
-                            <p> Physics: $ </p>
-
-                            <h5>Availability</h5>
-                            <p> Weekday daytime </p>
-                            <p> Weekday evening </p>
-                        </ul>
-                     </Col>
-                </Row>
-            </Container>
+                                <h5>Phone</h5>
+                                <p>{this.state.tutor.t_phone} </p>
+                            </ul>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }
 
-export default TutorInfo;
+export default withRouter(TutorInfo);
