@@ -35,7 +35,7 @@ class TutorBox extends React.Component {
             
         });
         console.log(this.props.subjectArr);
-        this.props.subjectArr.forEach(id => {
+        this.props.subjectArr?.forEach(id => {
             console.log(id);
             const index = this.state.allSubjectsId?.indexOf(id);
             console.log(this.state.allSubjectsName[index]);

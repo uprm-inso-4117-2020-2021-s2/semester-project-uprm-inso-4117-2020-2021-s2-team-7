@@ -92,14 +92,14 @@ class BulletinBoard extends React.Component {
         return (
             this.state.tutors.map((tutor, i) => (
                 (i >= 3) && (i < 6) &&
-                <TutorBox
+                    <TutorBox
                     tutorId={tutor?.tid}
                     firstName={tutor?.t_first_name}
                     lastName={tutor?.t_last_name}
                     nationality={tutor?.t_nationality}
                     overview={tutor?.t_overview}
-                    hourlyRate = {tutor?.offers[0].hourly_rate}
-                />
+                    subjectArr={this.getSubjectArrByTutor(tutor)}
+                    />
             ))
         );
     }

@@ -67,8 +67,6 @@ class TutorInfo extends Component {
                         <Col className='Profile' sm={3}>
                             <h3 className='Name'>
                                 {this.state.tutor.fullName} </h3>
-                            <h5> Nationality <TiLocation /> </h5>
-                            <p> {this.state.tutor.t_nationality} </p>
                             <h5> Subjects <TiBook /> </h5>
                             {this.state.mySubjects?.map(sub => (
                                 <p>{sub}</p>
@@ -78,8 +76,8 @@ class TutorInfo extends Component {
                         <Col className='Info' sm={{ span: 8, offset: 1 }}>
                             <div className='More'>
                                 <h1> More About This User </h1>
-                            </div>
-                            <ul>
+                            </div><br/>
+                            <div>
                                 <h5>Summary</h5>
                                 <p>{this.state.tutor.t_summary} </p>
 
@@ -97,7 +95,7 @@ class TutorInfo extends Component {
 
                                 <h5>Phone</h5>
                                 <p>{this.state.tutor.t_phone} </p>
-                            </ul>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
