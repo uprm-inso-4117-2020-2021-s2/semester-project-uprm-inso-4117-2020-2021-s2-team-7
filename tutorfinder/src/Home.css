@@ -10,11 +10,12 @@
 
 
 .box {
-    margin-left: 30%;
-    width: 40%;
+    /* margin-left: 30%; */
+    width: 45%;
     background: rgba(255, 255, 255, 0.65);
     border-radius: 25px;
     padding: 20px;
+    margin: auto;
 }
 
 .boxTitle {
@@ -54,4 +55,19 @@
     font-size: 0.95rem;
     color: #aaa;
     font-style: italic;
-  }
+}
+
+.tutorButton {
+    border-style: none;
+    border-radius: 48px;
+    z-index: 2;
+    padding: 8px 20px 8px 20px;
+    font-size: 24px;
+    color: whitesmoke;
+    background-color: #5D7FC5;
+}
+
+.tutorButton:hover {
+    color: whitesmoke;
+    background-color: #86afff;
+}

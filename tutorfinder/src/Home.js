@@ -6,7 +6,6 @@ import Nav from './Nav.js';
 import SignupPage from "./SignupPage";
 import Login from "./Login";
 import { withRouter } from "react-router-dom";
-import { Button } from "bootstrap";
 
 class Home extends React.Component {
 
@@ -54,26 +53,15 @@ class Home extends React.Component {
                 {this.state.isMainVisible && <div style={{ width: "100%", paddingTop: "10%" }}>
                     <div className="box">
                         <div className="boxTitle">
-                            Find the Best Tutor for You</div>
-                        <div className="boxText">
-                            Select from an ample catalog of tutors so you too <br></br>
-                        can improve your academic performance</div>
-                    </div>
-                    <div style={{ width: '10%', marginLeft: '30%', marginTop: '8px' }}>
-                        <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                            <div className="input-group">
-                                    <div onClick={() => { this.props.history.push('/bulletin') }}><i className="fa fa-search"></i> Find Tutor</div>
-                            </div></div>
-                        {/* <form action="">
-                        <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <button id="button-addon2" type="submit" className="btn btn-link text-warning" style={{width:'40px'}}><i className="fa fa-search"></i></button>
-                                </div>
-                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon2" className="form-control border-0 bg-light" style={{marginRight:'10px'}} />
-                            </div>
+                            Find the Best Tutor for You
                         </div>
-                    </form> */}
+                        <div className="boxText">
+                            Select from an ample catalog of tutors so you 
+                            too can improve your academic performance
+                        </div>
+                    </div>
+                    <div style={{ textAlign:"center", marginTop: "16px" }}>
+                        <button className="tutorButton" onClick={() => { this.props.history.push('/bulletin') }}>Find Tutor</button>
                     </div>
                 </div>}
                 {this.state.isJoinNowVisible && <SignupPage />}

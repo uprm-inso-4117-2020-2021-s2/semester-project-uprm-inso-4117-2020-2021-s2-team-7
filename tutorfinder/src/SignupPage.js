@@ -197,7 +197,7 @@ class SignupPage extends React.Component {
 
   render() {
     return (
-      <div className="container  ">
+      <div className="container">
         <div className=" body center">
           <br />
           <div className="head">

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import "./Navbar.css";
-import { FormControl, Form } from 'react-bootstrap';
-import pficon from "../assets/pficon.png";
+// import { FormControl, Form } from 'react-bootstrap';
+// import pficon from "../assets/pficon.png";
 import { withRouter } from "react-router-dom";
 
 
 class Navbar extends Component {
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
  
     goToHome() {
         this.props.history.push('/bulletin');
@@ -20,11 +20,11 @@ class Navbar extends Component {
             <nav className="Nav">
                 <h1 className="Logo" onClick={this.goToHome.bind(this)}>TutorFinder</h1>
 
-                <Form className="Searchbar">
+                {/* <Form className="Searchbar">
                       <FormControl type="text" placeholder="Search" className="mr-4 rounded-pill" />
-                </Form>
+                </Form> */}
 
-                <a href="/Account"><img src={pficon} className='pficon' alt="pficon"/></a>
+                {/* <a href="/Account"><img src={pficon} className='pficon' alt="pficon"/></a> */}
             </nav>
         )
     }
