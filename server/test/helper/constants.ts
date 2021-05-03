@@ -40,3 +40,15 @@ export const message = {
   mphone: '78744455555',
   memail: 'juan.delpueblo@upr.edu',
 }
+export const offer = {
+  modality: 'Online',
+  hourly_rate: 25.5,
+}
+
+export const subject = {
+  sname: 'English',
+}
+
+export const levelOfEducation = {
+  lename: 'Undergraduate',
+}
