@@ -1,0 +1,27 @@
+
+.body{
+    background-color: #E0E0E0;
+    position: relative;
+  text-align: center;
+  width: 80%;
+   
+ 
+}
+
+.container{
+    text-align: center;
+
+}
+
+.content{
+    position: relative;
+    text-align: center;
+    width: 50%;
+
+}
+
+.center{
+    margin-left: auto;
+    margin-right: auto;
+   
+}

@@ -1,9 +1,16 @@
-import { BaseModel, belongsTo, column, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import APIModel from 'App/Models/APIModel'
 import Tutor from 'App/Models/Tutor'
 
 export default class Address extends BaseModel implements APIModel {
-  public requiredParams: string[] = ['astreet1', 'acity', 'acountry', 'azipcode', 'tutor_id']
+  public requiredParams: string[] = [
+    'astreet1',
+    'astreet2',
+    'acity',
+    'acountry',
+    'azipcode',
+    'tutor_id',
+  ]
 
   @column({ isPrimary: true })
   public aid: number
