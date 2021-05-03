@@ -15,6 +15,7 @@ export const tutor = {
 export const tutor2 = {
   email: 'pueblo.deljuan@upr.edu',
   password: 'colegio2021',
+  password_confirmation: 'colegio2021',
   tfirst_name: 'Pueblo',
   tlast_name: 'Juan',
   tphone: '7874445555',
@@ -23,4 +24,19 @@ export const tutor2 = {
   toverview: 'Soy Juan del Pueblo',
   tweekdays_day: true,
   tweekends: true,
+}
+
+export const address = {
+  astreet1: 'Mi casa',
+  astreet2: 'arriba',
+  acity: 'Camuy',
+  acountry: 'PR',
+  azipcode: '00627',
+}
+
+export const message = {
+  mmodality: 'Online',
+  mmessage: 'Can you help me with math?',
+  mphone: '78744455555',
+  memail: 'juan.delpueblo@upr.edu',
 }

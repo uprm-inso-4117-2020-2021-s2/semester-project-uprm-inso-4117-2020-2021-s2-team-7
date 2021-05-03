@@ -80,7 +80,7 @@ export default class MessageController {
     try {
       let mmessage: Message | null = await Message.find(params.id)
       if (!mmessage)
-        return response.notFound({ message: `Could not find mmessage with id: ${params.id}.` })
+        return response.notFound({ message: `Could not find message with id: ${params.id}.` })
       await mmessage.delete()
       return response.send({ message: `Message deleted successfully`, id: params.id })
     } catch (err) {
