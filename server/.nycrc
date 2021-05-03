@@ -1,0 +1,6 @@
+{
+  "exclude": [
+    "server/config/auth.ts",
+    "server/test/**.ts"
+  ]
+}
