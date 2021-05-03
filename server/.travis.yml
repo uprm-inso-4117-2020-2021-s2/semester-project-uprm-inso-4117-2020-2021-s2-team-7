@@ -11,11 +11,8 @@ branches:
 install:
   - yarn install
 before_script:
-  - node ace make:migration
+  - node ace migration:rollback
 script:
   - yarn test
-deploy:
-  provider: heroku
-  api_key: ...
-  app: tutor-finder-server
-  on: staging
+after_script:
+  - node ace migration:run
