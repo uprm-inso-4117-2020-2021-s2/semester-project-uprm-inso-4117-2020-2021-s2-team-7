@@ -2,11 +2,16 @@ os: linux
 language: node_js
 node_js:
   - 15
+  - node
+services:
+  - postgresql
 branches:
   only:
     - staging
 install:
   - yarn install
+before_script:
+  - node ace make:migration
 script:
   - yarn test
 deploy:

@@ -49,6 +49,10 @@ export const subject = {
   sname: 'English',
 }
 
+export const subject2 = {
+  sname: 'Spanish',
+}
+
 export const levelOfEducation = {
   lename: 'Undergraduate',
 }
