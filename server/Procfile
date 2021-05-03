@@ -1,0 +1,2 @@
+release: cd build/ && node ace migration:run --force
+web: npm start
