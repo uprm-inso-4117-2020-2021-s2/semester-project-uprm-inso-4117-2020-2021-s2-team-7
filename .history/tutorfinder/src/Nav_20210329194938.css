@@ -1,0 +1,12 @@
+.title{
+    font-family: Nunito Sans;
+font-style: normal;
+font-weight: bold;
+font-size: 48px;
+line-height: 65px;
+text-align: center;
+}
+
+.navBar{
+    background: #5D7FC5;
+}

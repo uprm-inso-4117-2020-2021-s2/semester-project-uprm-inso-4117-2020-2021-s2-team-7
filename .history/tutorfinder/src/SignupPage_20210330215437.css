@@ -1,0 +1,21 @@
+
+.body{
+    background-color: #E0E0E0;
+   
+  text-align: center;
+  
+   
+ 
+}
+
+.container{
+    text-align: center;
+  width: 100%;
+  background-color: aqua;
+}
+
+.content{
+    text-align: right;
+    width: 50%;
+    background-color: red;
+}

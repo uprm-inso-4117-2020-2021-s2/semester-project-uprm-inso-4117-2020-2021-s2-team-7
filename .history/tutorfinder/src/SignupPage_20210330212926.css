@@ -1,0 +1,14 @@
+
+.body{
+    background-color: #E0E0E0;
+    width: 90%;
+  
+    height: 100%;
+    top: 10%;
+    position:absolute;
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+}

@@ -1,0 +1,72 @@
+.equationsBg {
+    width: 100vw;
+    min-height: 90vh;
+    z-index: -1;
+    background-color: whitesmoke;
+    background-image: url('../assets/equations.png');
+}
+
+.container {
+    padding-top: 30px;
+    /* width: 30%; */
+}
+
+.Profile {
+    height: 75vh;
+    padding: 1rem;
+    border: 2px solid #fff;
+    text-align: center;
+    background-color: #E0E0E0;
+    border: 1px solid #6F6B6B;
+    border-radius: 1rem!important;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+
+.pfp {
+    text-align: center;
+    width: 75%;
+}
+
+.Info {
+    height: 75vh;
+    padding: 1rem;
+    border: 1px solid #6F6B6B;
+    background-color: #E0E0E0;
+    border-radius: 1rem!important;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+
+.Name {
+    padding: 10px;
+}
+
+.More {
+    border-bottom: 1px solid #6F6B6B;
+    padding-bottom: 15px;
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.offers {
+    margin-left: 48px;
+}
+
+/* ul {
+    margin-left: 10px;
+    padding-top: 10px;
+    overflow-y: auto;
+    position: absolute;
+    white-space: nowrap;
+    text-align: center;
+} */
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+* {
+  -ms-overflow-style: none !important;
+}

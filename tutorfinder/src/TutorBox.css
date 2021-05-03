@@ -1,0 +1,61 @@
+
+.mainBox {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 16px 32px 0px 32px;
+    z-index: 0;
+
+}
+
+.tutorName {
+    width: 50%;
+    height: 50%;
+    margin-top: 4%;
+    margin-left: 10%;
+    float: left;
+    z-index: 2;
+    font-size: 24px;
+    padding-top: 24px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: #5D7FC5;
+}
+
+.tutorMain {
+    width: 90%;
+    height: 55%;
+    margin-left: 20%;
+    z-index: 1;
+    background-color: #D8D8D8;
+}
+
+.tutorInfo {
+    width: 90%;
+    height: 45%;
+    margin-left: 20%;
+    z-index: 1;
+    background-color: #D8D8D8;
+}
+
+.tutorOverview {
+    width: 90%;
+    height: 45%;
+    margin-left: 5%;
+    z-index: 1;
+    font-size: 13px;
+}
+
+.contactButton {
+    border-style: none;
+    border-radius: 16px;
+    z-index: 2;
+    padding: 4px 24px 4px 24px;
+    font-size: 16px;
+    color: whitesmoke;
+    background-color: #1B52C0;
+}
+
+.contactButton:hover {
+    background-color: #5D7FC5;
+}
