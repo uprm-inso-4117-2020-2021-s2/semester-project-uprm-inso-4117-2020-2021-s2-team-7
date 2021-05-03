@@ -53,7 +53,7 @@ text-align: center;
 
 .login{
     position:absolute;
-    top:200px;
+    top:100px;
     left:50%;
     width :75%;
     height:50%;
@@ -88,6 +88,7 @@ text-align: center;
 }
 
 .text-right{
+    margin-top: 5%;
     text-align: right;
   
 }
