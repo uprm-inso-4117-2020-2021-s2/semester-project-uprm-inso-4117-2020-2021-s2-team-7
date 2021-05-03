@@ -5,7 +5,7 @@
     height: 100vh;
     z-index: -1;
     background-color: whitesmoke;
-    background-image: url('equations.png');
+    background-image: url('assets/equations.png');
 }
 
 .optionsBg {
@@ -28,4 +28,23 @@
     margin: 10%;
     border-radius: 10%;
     background-color: whitesmoke;
+}
+
+.pageButton {
+    position: absolute;
+    border-style: none;
+    border-radius: 16px;
+    z-index: 2;
+    padding: 4px 16px 4px 16px;
+    font-size: 14px;
+    width: 35%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    text-align: center;
+    bottom: 0;
+    background-color: #D8D8D8;
+}
+
+.pageButton:hover {
+    background-color: #F0F0F0;
 }

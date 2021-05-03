@@ -41,3 +41,10 @@ height: 650px;
     margin-right: auto;
    
 }
+
+.dropdw {
+  text-align: left;
+  width: 100%;
+  height: auto;
+  font-size: 17px;
+}

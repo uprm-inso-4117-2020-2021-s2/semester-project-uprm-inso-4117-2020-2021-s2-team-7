@@ -5,11 +5,11 @@ import 'font-awesome/css/font-awesome.min.css';
 import Nav from './Nav.js';
 import SignupPage from "./SignupPage";
 import Login from "./Login";
-
+import { withRouter } from "react-router-dom";
 
 class Home extends React.Component {
 
-    constructor (props) {
+    constructor(props) {
         super(props);
         this.state = {
             isJoinNowVisible: false,
@@ -22,7 +22,7 @@ class Home extends React.Component {
         this.setState({
             isJoinNowVisible: true,
             isSignInVisible: false,
-            isMainVisible:false
+            isMainVisible: false
         });
     }
 
@@ -30,7 +30,7 @@ class Home extends React.Component {
         this.setState({
             isJoinNowVisible: false,
             isSignInVisible: true,
-            isMainVisible:false
+            isMainVisible: false
         });
     }
 
@@ -38,45 +38,37 @@ class Home extends React.Component {
         this.setState({
             isJoinNowVisible: false,
             isSignInVisible: false,
-            isMainVisible:true
+            isMainVisible: true
         });
     }
 
-    render(){
-    return (
-        <div className="bod">
-            <Nav 
-            onJoinNowClick={this.onJoinNowClick.bind(this)} 
-            onSignInClick={this.onSignInClick.bind(this)} 
-            onLogoClick={this.onLogoClick.bind(this)}>
-            </Nav>
-            {this.state.isMainVisible && <div style={{ width: "100%", paddingTop: "30%" }}>
-                <div className="box">
-                    <div className="boxTitle">
-                        Find the Best Tutor for You</div>
-                    <div className="boxText">
-                        Select from an ample catalog of tutors so you too <br></br>
-                        can improve your academic performance</div>
-                </div>
-                <div style={{ width: '40%', marginLeft:'30%', marginTop: '8px' }}>
-
-                    <form action="">
-                        <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button id="button-addon2" type="submit" class="btn btn-link text-warning" style={{width:'40px'}}><i class="fa fa-search"></i></button>
-                                </div>
-                                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon2" class="form-control border-0 bg-light" style={{marginRight:'10px'}} />
-                            </div>
+    render() {
+        return (
+            <div className="bod">
+                <Nav
+                    onJoinNowClick={this.onJoinNowClick.bind(this)}
+                    onSignInClick={this.onSignInClick.bind(this)}
+                    onLogoClick={this.onLogoClick.bind(this)}>
+                </Nav>
+                {this.state.isMainVisible && <div style={{ width: "100%", paddingTop: "10%" }}>
+                    <div className="box">
+                        <div className="boxTitle">
+                            Find the Best Tutor for You
                         </div>
-                    </form>
-                </div>
-            </div>}
-            {this.state.isJoinNowVisible && <SignupPage/>}
-            {this.state.isSignInVisible && <Login/>}
-        </div>
-    );
+                        <div className="boxText">
+                            Select from an ample catalog of tutors so you 
+                            too can improve your academic performance
+                        </div>
+                    </div>
+                    <div style={{ textAlign:"center", marginTop: "16px" }}>
+                        <button className="tutorButton" onClick={() => { this.props.history.push('/bulletin') }}>Find Tutor</button>
+                    </div>
+                </div>}
+                {this.state.isJoinNowVisible && <SignupPage />}
+                {this.state.isSignInVisible && <Login />}
+            </div>
+        );
     }
 }
 
-export default Home;
+export default withRouter(Home);

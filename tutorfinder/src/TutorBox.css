@@ -1,49 +1,59 @@
 
 .mainBox {
     position: relative;
-    width: 240px;
-    height: 240px;
-    margin: 32px 32px 0px 32px;
+    width: 260px;
+    height: 260px;
+    margin: 16px 32px 0px 32px;
     z-index: 0;
 
 }
 
-.tutorMain {
-    width: 80%;
-    height: 55%;
-    margin-left: 20%;
-    z-index: 1;
-    background-color: #E0E0E0;
-}
-
-.tutorInfo {
-    width: 80%;
-    height: 45%;
-    margin-left: 20%;
-    z-index: 1;
-    background-color: #E0E0E0;
-}
-
-.tutorImg {
+.tutorName {
     width: 50%;
     height: 50%;
     margin-top: 4%;
     margin-left: 10%;
     float: left;
     z-index: 2;
-    background-color: coral;
+    font-size: 24px;
+    padding-top: 24px;
+    text-align: center;
+    color: whitesmoke;
+    background-color: #5D7FC5;
+}
+
+.tutorMain {
+    width: 90%;
+    height: 55%;
+    margin-left: 20%;
+    z-index: 1;
+    background-color: #D8D8D8;
+}
+
+.tutorInfo {
+    width: 90%;
+    height: 45%;
+    margin-left: 20%;
+    z-index: 1;
+    background-color: #D8D8D8;
+}
+
+.tutorOverview {
+    width: 90%;
+    height: 45%;
+    margin-left: 5%;
+    z-index: 1;
+    font-size: 13px;
 }
 
 .contactButton {
     border-style: none;
     border-radius: 16px;
     z-index: 2;
-    margin-top: 16px;
-    margin-left: 15px;
     padding: 4px 24px 4px 24px;
-    font-size: 12px;
+    font-size: 16px;
     color: whitesmoke;
-    background-color: #1b52c0;
+    background-color: #1B52C0;
 }
 
 .contactButton:hover {
