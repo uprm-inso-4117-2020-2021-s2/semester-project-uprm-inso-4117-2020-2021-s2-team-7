@@ -3,6 +3,7 @@ import test from 'japa'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Tutor from 'App/Models/Tutor'
 import supertest from 'supertest'
+import { createTutor, login } from '../helper/functions'
 
 const BASE_URL = `http://${process.env.HOST}:${process.env.PORT}/tutorFinder`
 const app = supertest(BASE_URL)
@@ -44,12 +45,12 @@ const tutor2Login = {
   password: 'colegio2021',
 }
 
-const message = {
-  mmodality: 'Online',
-  mmessage: 'Can you help me with math?',
-  mphone: '78744455555',
-  memail: 'juan.delpueblo@upr.edu',
-}
+// const message = {
+//   mmodality: 'Online',
+//   mmessage: 'Can you help me with math?',
+//   mphone: '78744455555',
+//   memail: 'juan.delpueblo@upr.edu',
+// }
 
 test.group('Tutor', async (group) => {
   group.beforeEach(async () => {
@@ -146,7 +147,7 @@ test.group('Tutor', async (group) => {
       await Database.rollbackGlobalTransaction()
     })
 
-    test('Login with non existing tutor', async (assert) => {
+    test('Login with non existing tutor', async () => {
       await app.post('/login').send(tutorLogin).expect(500).expect('Content-Type', /json/)
     })
 
@@ -231,25 +232,84 @@ test.group('Tutor', async (group) => {
     })
   })
 
-  // test.group('/tutors - PUT', (group) => {
-  //   group.beforeEach(async () => {
-  //     await Database.beginGlobalTransaction()
-  //   })
-  //
-  //   group.afterEach(async () => {
-  //     await Database.rollbackGlobalTransaction()
-  //   })
-  // })
-  //
-  // test.group('/tutors - DELETE', (group) => {
-  //   group.beforeEach(async () => {
-  //     await Database.beginGlobalTransaction()
-  //   })
-  //
-  //   group.afterEach(async () => {
-  //     await Database.rollbackGlobalTransaction()
-  //   })
-  // })
+  test.group('/tutors - PUT', (group) => {
+    group.beforeEach(async () => {
+      await Database.beginGlobalTransaction()
+    })
+
+    group.afterEach(async () => {
+      await Database.rollbackGlobalTransaction()
+    })
+
+    test('Update non existing tutor', async (assert) => {
+      const validTutor = Object.assign({}, tutor)
+      // @ts-ignore
+      delete validTutor.password_confirmation
+      const createdTutor = await Tutor.create(validTutor)
+      const token = await login(createdTutor.email, validTutor.password)
+      const { body } = await app
+        .put('/tutors/99')
+        .send({ tfirst_name: 'Juan' })
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404)
+        .expect('Content-Type', /json/)
+      assert.hasAllKeys(body, ['message'])
+      assert.equal(body.message, 'Could not find tutor with id: 99')
+    })
+
+    test('Successfully update tutor', async (assert) => {
+      const validTutor = Object.assign({}, tutor)
+      // @ts-ignore
+      delete validTutor.password_confirmation
+      const createdTutor = await Tutor.create(validTutor)
+      const token = await login(createdTutor.email, validTutor.password)
+      const { body } = await app
+        .put(`/tutors/${createdTutor.tid}`)
+        .send({ tfirst_name: 'Juan' })
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200)
+        .expect('Content-Type', /json/)
+      const resTutor = body.tutor
+      assert.equal(resTutor.t_first_name, createdTutor.tFirstName)
+    })
+  })
+
+  test.group('/tutors - DELETE', (group) => {
+    group.beforeEach(async () => {
+      await Database.beginGlobalTransaction()
+    })
+
+    group.afterEach(async () => {
+      await Database.rollbackGlobalTransaction()
+    })
+
+    test('Delete non existing tutor', async (assert) => {
+      const createdTutor = await createTutor(tutor)
+      const token = await login(createdTutor.email, tutor.password)
+      const { body } = await app
+        .delete('/tutors/99')
+        .set('Authorization', `Bearer ${token}`)
+        .expect(404)
+        .expect('Content-Type', /json/)
+      assert.equal(body.message, 'Could not find tutor with id: 99.')
+    })
+
+    test('Successfully delete tutor', async (assert) => {
+      const validTutor = Object.assign({}, tutor)
+      // @ts-ignore
+      delete validTutor.password_confirmation
+      const createdTutor = await Tutor.create(validTutor)
+      const token = await login(createdTutor.email, validTutor.password)
+      const { body } = await app
+        .delete(`/tutors/${createdTutor.tid}`)
+        .set('Authorization', `Bearer ${token}`)
+        .expect(200)
+        .expect('Content-Type', /json/)
+      assert.equal(body.message, 'Tutor deleted successfully')
+      assert.equal(body.id, createdTutor.tid.toString())
+      assert.lengthOf(await Tutor.all(), 0)
+    })
+  })
 
   // test('Throws 404 error, tutor not found', async (assert) => {
   //   try {
