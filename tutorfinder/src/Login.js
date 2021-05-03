@@ -81,7 +81,7 @@ class Login extends React.Component {
                 </FormGroup>
               </Col>
             <div className="text-right">
-              <Button color="danger" type="submit" className="buttons submit"  >Submit</Button>
+              <Button color="danger" type="submit" className="buttons submit">Enter</Button>
             </div>
           </Form>
         </Container>

@@ -201,10 +201,10 @@ class SignupPage extends React.Component {
         <div className=" body center">
           <br />
           <div className="head">
-            <h1 className="">Signup</h1>
+            <h1 className="">Register</h1>
             <hr />
           </div>
-          <div className="content center scroll ">
+          <div className="content center scroll">
             <Form className="" onSubmit={this.handleSubmit.bind(this)}>
               <Col className="">
                 <FormGroup inline>

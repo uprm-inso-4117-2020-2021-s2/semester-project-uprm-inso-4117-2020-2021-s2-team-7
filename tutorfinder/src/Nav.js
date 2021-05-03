@@ -8,13 +8,16 @@ class Nav extends React.Component {
 
   return (
     <div className="navspace">
-                <table style={{ width: '100%', height: '100px' }}>
+                <table style={{ width: '100%', height: '80px' }}>
                     <tbody>
                         <tr>
-                            <td style={{ width: '70%', verticalAlign: 'middle' }} onClick={() => this.props.onLogoClick()}>
+                            <td onClick={() => this.props.onLogoClick()}>
                                 <div className="navtext">
                                     TutorFinder
                                 </div>
+                            </td>
+                            <td>
+                                <div className="space"></div>
                             </td>
                             <td onClick={()=> this.props.onJoinNowClick()}>
                                 <div className="boton" >
